@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Think you know movies?</title>
+    <title>NYT Article Search</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery.js"></script>
@@ -18,10 +18,9 @@
     </div>
     <div class="container">
         <div class="row">
+            <div class="col-lg-8 col-md-6 col-sm-4"></div>
             <div class="col-lg-8 col-md-6 col-sm-4">
-            </div>
-            <div class="col-lg-8 col-md-6 col-sm-4">
-                <form>
+                <form><strong>Search Parameters</strong>
                     <p>Search Term</p>
                     <input id=searchTerm type="text" name="Search Term" size=75></input><br>
                     <p>Number of Records to Retrieve</p>
@@ -33,5 +32,17 @@
                 </form>
             </div>
         </div>
+        <div class="row">
+        </div>
+        <div class="row">
+            <br>
+            <div class="col-lg-2 col-md-3 col-sm-2">
+                <div class="btn btn-block btn-primary btn-lg" type="button" id="searchButton">Search</div>
+                <br>
+                <div class="btn btn-block btn-primary btn-lg" type="button" id="clearButton">Clear</div>
+
+            </div>
+        </div>
+
 
 </html>
