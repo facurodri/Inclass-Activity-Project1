@@ -17,18 +17,23 @@
         <h1 class="display-1">First Date App!</h1>
     </div>
 
-    <div class ="container">
+    <div class="container jokeArea py-3">
         <div class="row">
-            <div class="col-md-4 col-sm-8">
-    <div class="card">
-          <div class="card-header">Break the Ice!</div>
-          <h4><span id="jokeQ"></span></h4>
-              <h6><span id="jokeGen"></span></h6>
-          <!-- <a href= "#" class="card-link" onclick=displayJoke()> Next Joke</a> -->
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">Break the Ice!</div>
+                    <h4><span id="jokeQ"></span></h4>
+                    <h6><span id="jokeGen"></span></h6>
+                    <a href="#" class="card-link"> Next Joke</a>
+                    <a href="#collapse" role="button" data-toggle="jokeArea" aria-expanded="false"
+                        aria-controls="collapseExample"> Hide</a>
+                </div>
+            </div>
         </div>
-      </div>
-    
-       <div class="col-md-8 col-sm-4">
+    </div>
+    <div class="container py-3">
+        <div class="row">
+            <div class="col-md-6 col-sm-4">
                 <form>
                     <div class="form-group">
                         <label for="establishmentType"><strong>Type of Establishment</strong></label>
@@ -54,16 +59,11 @@
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-6 col-sm-4">
+            
+            <div class="col-md-6">
                 <div id="resultsSpace">Results here</div>
             </div>
         </div>
     </div>
-</div>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="../Inclass-Activity-Project1/assets/game.js"></script>
-   

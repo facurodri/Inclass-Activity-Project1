@@ -25,7 +25,7 @@ function displayJokes() {
           }
       });
 }
-$(".skip").on("click", function () {
+$(".card-link").on("click", function () {
  displayJokes();
 })
 
@@ -52,7 +52,7 @@ $("#launch-search").on("click", function (event) {
     console.log(costRange);
     var searchRadius = searchMiles * 1600;
     console.log(searchRadius);
-    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=5&";
+    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=10&";
     // var queryURL = "https://api.yelp.com/v3/businesses/search?location=cleveland";
     // var queryURL = "https://api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=5&";
     // var queryURL = "https://api.yelp.com/v3/businesses/search?"
@@ -66,7 +66,7 @@ $("#launch-search").on("click", function (event) {
     })
         .then(function (response) {
             console.log(response);
-            for (var j = 0; j < 5; j++) {
+            for (var j = 0; j < 10; j++) {
               var restaurantName = response.businesses[j].name;
               console.log(restaurantName);
               var restaurantAddress = response.businesses[j].location.address1 + ", " + response.businesses[j].location.city + ", " + response.businesses[j].location.state + " " + response.businesses[j].location.zip_code;
@@ -75,7 +75,7 @@ $("#launch-search").on("click", function (event) {
               console.log(restaurantPhone);
               var restaurantRating = response.businesses[j].rating;
               console.log("Rating: " + restaurantRating);
-              createSearchCard(restaurantName);
+              createSearchCard(restaurantName,restaurantAddress, restaurantPhone, restaurantRating);
             };
 
         })
@@ -83,14 +83,18 @@ $("#launch-search").on("click", function (event) {
 });
 
 
-function createSearchCard (restaurantName){
+function createSearchCard (restaurantName, restaurantAddress, restaurantPhone, restaurantRating){
  
-  var cardDiv = $('<div class="card border-light mb-3" style="max-width: 18rem;">').text(restaurantName);
+  var cardDiv = $('<div class="card border-light mb-3" "width:18rem;">');
   var restName = $("<div class='card title'>").text(restaurantName);
   var restAddress = $("<h5 class='card-text'>").text(restaurantAddress);
+  var restPhone = $("<div class ='card-text'>").text(restaurantPhone);
+  var restRating = $("<div class ='card-text'>").text(restaurantRating);
   
   cardDiv.append(restName);
   cardDiv.append(restAddress);
+  cardDiv.append(restPhone);
+  cardDiv.append(restRating);
   $("#resultsSpace").append(cardDiv);
   
 }

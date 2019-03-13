@@ -11,9 +11,9 @@
   background-size: cover;
 }
 .mainBody{
-    background-image: url(../assets/images/First-Date.jpg);
-    background-size:50%;
-    background-position: right;
+    background-color: aliceblue;
+    background-size:100%;
+    background-position: bottom;
     background-repeat: no-repeat;
 }
 .card-header{
@@ -26,7 +26,7 @@
     text-align: center;
     background-image: url(../assets/images/brokenice2.jpg);
     background-position: center;
-    background-size: 95%;
+    background-size: 33%;
     border: 3px solid black;
 } 
 #jokeGen {
@@ -38,3 +38,12 @@
     color: rgb(5, 5, 5);
     text-shadow: 2px 2px 2px white;
     font-size: 1.25rem;
+}
+#resultsSpace {
+    float: left;
+}
+.form-group {
+    color:red;
+    text-shadow: 2px 2px 2px #fff
+    ;
+}
