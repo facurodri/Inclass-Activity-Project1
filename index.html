@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>NYT Article Search</title>
+    <title>First Date</title>
 
     <link rel="stylesheet" type="text/css" href="../Inclass-Activity-Project1/assets/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -38,28 +38,36 @@
                     <div class="form-group">
                         <label for="establishmentType"><strong>Type of Establishment</strong></label>
                         <input type="text" class="form-control" id="establishment-input"
-                            placeholder="Restaurant, drugstore, dry cleaner, etc.">
+                            placeholder="Italian, Coffee, Ice Cream, etc.">
                     </div>
                     <div class="form-group">
                         <label for="location"><strong>ZIP Code</strong></label>
-                        <input type="text" class="form-control" id="location-input" placeholder="Enter your ZIP code">
+                        <input type="text" class="form-control" id="location-input" maxlength="5" minlength="5" placeholder="00000" pattern="[0-9]{5}"> 
                     </div>
                     <div class="form-group">
-                        <label for="radius"><strong>Radius (in miles)</strong></label>
-                        <input type="text" class="form-control" id="radius-input"
-                            placeholder="Enter your search radius in miles">
+                        <label for="radius"><strong>Radius (between 1 and 25 miles)</strong></label>
+                        <input type="number" class="form-control" id="radius-input" value="10" max="25" min="1">
                     </div>
                     <div class="form-group">
                         <label for="cost"><strong>Cost range ($ $$ $$$)</strong></label>
-                        <input type="text" class="form-control" id="cost-input"
-                            placeholder="Enter your cost range: $ $$ or $$$">
+                        <select type="text" class="form-control" id="cost-input" name="priceRange">
+                            <option value="1">$</option>
+                            <option value="2">$$</option>
+                            <option value="3">$$$</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <button class="btn-primary" id="launch-search" type="submit">Submit</button></td>
                     </div>
                 </form>
+                <div id="invalidZIPCode" class="modal">
+                    <div class="modal-content">
+                        <p>Please enter a valid ZIP code<br>(Click to close)</p>
+                    </div>
+                </div>
+
             </div>
-            
+
             <div class="col-md-6">
                 <div id="resultsSpace">Results here</div>
             </div>

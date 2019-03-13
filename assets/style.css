@@ -47,3 +47,36 @@
     text-shadow: 2px 2px 2px #fff
     ;
 }
+.modal {
+    display: none; 
+    position: relative; 
+    z-index: 1; 
+    margin: auto;
+    left: 25;
+    top: 25; 
+    width: 45%; 
+    height: 25%; 
+    background-color: royalblue;
+}
+.modal-content {
+    margin: 0; 
+    padding: 20px;
+    font-size: 11pt;
+    text-align: center;
+    border: 1px solid #888;
+    width: 80%; 
+  }
+  .close {
+    color: blue;
+    text-align: center;
+    float: right;
+    font-size: 11pt;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
