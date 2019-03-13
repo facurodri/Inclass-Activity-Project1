@@ -1,18 +1,19 @@
+
 .display-1{
     color:white;
     font-family: cursive;
     text-shadow: 2px 2px 3px rgb(144, 6, 29);
 }
 .banner {
-    /* background-image: url(../assets/images/abstract-hearts-background.jpg);
-    background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; */
+    background-image: url(../assets/images/abstract-hearts-background.jpg);
+ background-position: center;
+  
+  background-size: cover;
 }
 .mainBody{
     background-image: url(../assets/images/First-Date.jpg);
-    background-size: cover;
-    background-position: center;
+    background-size:50%;
+    background-position: right;
     background-repeat: no-repeat;
 }
 .card-header{
@@ -37,4 +38,3 @@
     color: rgb(5, 5, 5);
     text-shadow: 2px 2px 2px white;
     font-size: 1.25rem;
-}
