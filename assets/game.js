@@ -79,12 +79,13 @@ $("#launch-search").on("click", function (event) {
 
 function createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating) {
 
-    var cardDiv = $('<div class="card border-light mb-3" "width:18rem;">');
+    var cardDiv = $('<div class="card border-light mb-3" style="width:18rem;">');
     var restName = $("<div class='card title'>").text(restaurantName);
     var restAddress = $("<h5 class='card-text'>").text(restaurantAddress);
     var restPhone = $("<div class ='card-text'>").text(restaurantPhone);
     var restRating = $("<div class ='card-text'>").text(restaurantRating);
 
+    
     cardDiv.append(restName);
     cardDiv.append(restAddress);
     cardDiv.append(restPhone);
