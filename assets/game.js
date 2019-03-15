@@ -5,6 +5,7 @@ var searchRadius = "";
 var costRange = "";
 var jokeQ = "";
 var punchLine = "";
+var mapAddress = "";
 
 function displayJokes() {
     var queryURL = "https://official-joke-api.appspot.com/random_ten";
@@ -30,7 +31,7 @@ $(".card-link").on("click", function () {
 })
 
 displayJokes();
-
+createMapQuery();
 
 $("#launch-search").on("click", function (event) {
     event.preventDefault();
@@ -69,7 +70,9 @@ $("#launch-search").on("click", function (event) {
                 console.log(restaurantPhone);
                 var restaurantRating = response.businesses[j].rating;
                 console.log("Rating: " + restaurantRating);
-                createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating);
+                var ID = response.businesses[j].id;
+                console.log("ID = " + ID);
+                createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating, ID);
             };
 
         })
@@ -77,18 +80,21 @@ $("#launch-search").on("click", function (event) {
 });
 
 
-function createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating) {
+function createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating, ID) {
 
     var cardDiv = $('<div class="card border-light mb-3" "width:18rem;">');
-    var restName = $("<div class='card title'>").text(restaurantName);
-    var restAddress = $("<h5 class='card-text'>").text(restaurantAddress);
-    var restPhone = $("<div class ='card-text'>").text(restaurantPhone);
-    var restRating = $("<div class ='card-text'>").text(restaurantRating);
+    var restName = $("<div class='card title' id='divRest" + ID  +"'>").text(restaurantName);
+    var restAddress = $("<h5 class='card-text' id='divAdd" + ID  +"'>").text(restaurantAddress);
+    var restPhone = $("<div class ='card-text' id='divPhone" + ID  +"'>").text(restaurantPhone);
+    var restRating = $("<div class ='card-text' id='divRating" + ID  +"'>").text(restaurantRating);
+    var mapButton = $("<button type='button' class='mapBtn' data-name='" + ID + "'>").text("Map this");
 
     cardDiv.append(restName);
     cardDiv.append(restAddress);
     cardDiv.append(restPhone);
     cardDiv.append(restRating);
+    cardDiv.append(mapButton);
+    // cardDiv.append(ID);
     $("#resultsSpace").append(cardDiv);
 
 }
@@ -102,8 +108,37 @@ function invalidZIPModal() {
 }
 
 function checkLength(zipLocation) {
-    var zip = $("#location-input").val().trim()
+    var zip = $("#location-input").val().trim();
     if (zip.length != 5) {
         invalidZIPModal();
     }
 }
+
+
+    function createMapQuery() {
+        $(".mapBtn").on("click", function () {
+            ID
+            mapAddress = $("#divAdd" + ID).text();
+            console.log(mapAddress);
+        })
+
+
+    }
+
+
+// function mapThis() {
+//     $.ajax({
+//         url: mapQueryURL,
+//         method: "GET"
+//     })
+//         .then(function (response) {
+//             console.log(response);
+//             var results = response;
+//             // cycle through each of the elements of the results array
+//             for (i = 0; i < results.length; i++) {
+
+//             }
+//         });
+// }
+
+// http://www.mapquestapi.com/geocoding/v1/address?key=xFxVU4pZGhIu50jG3PO7DQiBnQiPSWcG&location=
