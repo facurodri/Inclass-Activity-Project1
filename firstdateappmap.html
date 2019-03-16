@@ -25,7 +25,16 @@
 <script>
    
        var mymap = L.map('mapid').setView([41.5078, -81.6066], 13);
-       var marker = L.marker([41.5078, -81.6066]).addTo(mymap);
+       var marker = L.marker([41.5099, -81.6099]).addTo(mymap);
+       var marker2 = L.marker([41.49999, -81.6100]).addTo(mymap);
+       var marker3 = L.marker([41.49989, -81.6200]).addTo(mymap);
+       var marker4 = L.marker([41.49979, -81.6300]).addTo(mymap);
+       var marker5 = L.marker([41.49969, -81.6400]).addTo(mymap);
+       marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+       marker2.bindPopup("<b>YO YO!</b><br>I am a popup.").openPopup();
+       marker3.bindPopup("<b>YO YO!</b><br>I am a popup.").openPopup();
+       marker4.bindPopup("<b>YO YO!</b><br>I am a popup.").openPopup();
+       marker5.bindPopup("<b>YO YO!</b><br>I am a popup.").openPopup();
       
     
        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
