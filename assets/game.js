@@ -74,14 +74,10 @@ $("#launch-search").on("click", function (event) {
                 console.log("ID = " + ID);
                 createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating, ID);
             };
-
         })
-
 });
 
-
 function createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating, ID) {
-
     var cardDiv = $('<div class="card border-light mb-3" "width:18rem;">');
     var restName = $("<div class='card title' id='divRest" + ID + "'>").text(restaurantName);
     var restAddress = $("<h5 class='card-text' id='divAdd" + ID + "'>").text(restaurantAddress);
@@ -95,7 +91,6 @@ function createSearchCard(restaurantName, restaurantAddress, restaurantPhone, re
     cardDiv.append(mapButton);
     // cardDiv.append(ID);
     $("#resultsSpace").append(cardDiv);
-
 }
 
 function invalidZIPModal() {
