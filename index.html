@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>First Date</title>
+    <title>Home Page</title>
 
-    <link rel="stylesheet" type="text/css" href="../Inclass-Activity-Project1/assets/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 </head>
@@ -20,7 +20,7 @@
     <div class="container jokeArea py-3">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card icebreaker">
                     <div class="card-header">Break the Ice!</div>
                     <h4><span id="jokeQ"></span></h4>
                     <h6><span id="jokeGen"></span></h6>
@@ -42,7 +42,8 @@
                     </div>
                     <div class="form-group">
                         <label for="location"><strong>ZIP Code</strong></label>
-                        <input type="text" class="form-control" id="location-input" maxlength="5" minlength="5" placeholder="00000" pattern="[0-9]{5}"> 
+                        <input type="text" class="form-control" id="location-input" maxlength="5" minlength="5"
+                            placeholder="00000" pattern="[0-9]{5}">
                     </div>
                     <div class="form-group">
                         <label for="radius"><strong>Radius (between 1 and 25 miles)</strong></label>
@@ -69,9 +70,16 @@
             </div>
 
             <div class="col-md-6">
-                <div id="resultsSpace">Results here</div>
+                <div id="resultsSpace"></div>
             </div>
         </div>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
+    <!----->
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="../Inclass-Activity-Project1/assets/game.js"></script>
+</body>
+
+</html>
