@@ -1,3 +1,77 @@
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyDNAzAPsRxEWr0BTKS1vapd364ySRuCe-0",
+    authDomain: "first-project-9f391.firebaseapp.com",
+    databaseURL: "https://first-project-9f391.firebaseio.com",
+    projectId: "first-project-9f391",
+    storageBucket: "first-project-9f391.appspot.com",
+    messagingSenderId: "290744685174"
+ };
+ firebase.initializeApp(config);
+ 
+ //get data
+ firebase.firestore().collection("first-project").get().then(snapshot => {
+   console.log(snapshot.docs)
+ });
+ 
+ 
+ //keeping track of user authentification status
+ firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        // User is signed in.
+        console.log("user logged in: " + user)
+    } else {
+        console.log("user logged out");
+    }
+ });
+ 
+ //SIGN UP FUNCTION
+ $("#sign-up").on("click", function () {
+    
+    // Grab values from text-boxes
+    const firstName = $("#first-name").val().trim();
+    const lastName = $("#last-name").val().trim();
+    const email = $("#signup-email").val().trim();
+    const pass = $("#signup-pass").val().trim();
+    //console.log(email, pass)
+ 
+    firebase.auth().createUserWithEmailAndPassword(email, pass).then(cred => {
+        // console.log(cred.user)
+        //handle errors
+        //var errorCode = error.code;
+        //var errorMessage = error.message;
+ 
+        // Clears the text-boxes
+        $("#first-name").val("");
+        $("#last-name").val("");
+        $("#signup-email").val("");
+        $("#signup-pass").val("");
+    })
+ })
+ 
+ //LOG OUT FUNCTION
+ $("#log-out").on("click", function () {
+    
+    firebase.auth().signOut();
+ });
+ 
+ 
+ //LOG IN FUNCTION
+ $("#log-in").on("click", function () {
+    
+    //get user info
+    const email = $("#login-email").val().trim();
+    const pass = $("#login-pass").val().trim();
+ 
+    firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
+        console.log(cred.user)
+        //SEND TO MAIN PAGE 
+        window.location.href = "index.html";
+ 
+        $("#login-email").val("");
+        $("#login-pass").val("");
+    })
+ })
 // variables
 var establishmentType = "";
 var zipLocation = "";
