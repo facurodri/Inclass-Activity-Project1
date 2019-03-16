@@ -11,8 +11,8 @@
 }
 .mainBody{
     background-image: url(../assets/images/brick-wall-dark.png);
-    background-color: #ce1800;
-    background-size:33%;
+    background-color: rgb(160, 155, 155);
+    background-size:15%;
     background-position: bottom;
     background-repeat: repeat;
 }

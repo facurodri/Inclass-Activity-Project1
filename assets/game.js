@@ -7,7 +7,6 @@ var config = {
     storageBucket: "first-project-9f391.appspot.com",
     messagingSenderId: "290744685174"
  };
-
  firebase.initializeApp(config);
  
  //get data
