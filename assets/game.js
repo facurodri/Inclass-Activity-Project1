@@ -83,12 +83,11 @@ $("#launch-search").on("click", function (event) {
 function createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating, ID) {
 
     var cardDiv = $('<div class="card border-light mb-3" "width:18rem;">');
-    var restName = $("<div class='card title' id='divRest" + ID  +"'>").text(restaurantName);
-    var restAddress = $("<h5 class='card-text' id='divAdd" + ID  +"'>").text(restaurantAddress);
-    var restPhone = $("<div class ='card-text' id='divPhone" + ID  +"'>").text(restaurantPhone);
-    var restRating = $("<div class ='card-text' id='divRating" + ID  +"'>").text(restaurantRating);
+    var restName = $("<div class='card title' id='divRest" + ID + "'>").text(restaurantName);
+    var restAddress = $("<h5 class='card-text' id='divAdd" + ID + "'>").text(restaurantAddress);
+    var restPhone = $("<div class ='card-text' id='divPhone" + ID + "'>").text(restaurantPhone);
+    var restRating = $("<div class ='card-text' id='divRating" + ID + "'>").text(restaurantRating);
     var mapButton = $("<button type='button' class='mapBtn' data-name='" + ID + "'>").text("Map this");
-
     cardDiv.append(restName);
     cardDiv.append(restAddress);
     cardDiv.append(restPhone);
@@ -114,16 +113,28 @@ function checkLength(zipLocation) {
     }
 }
 
-
-    function createMapQuery() {
-        $(".mapBtn").on("click", function () {
-            ID
-            mapAddress = $("#divAdd" + ID).text();
-            console.log(mapAddress);
-        })
+// var reply_click = function() {
+//     alert("Button clicked, id "+this.id+", text"+this.innerHTML);
+// }
 
 
-    }
+
+function createMapQuery(ID) {
+    $(".mapBtn").on("click", function () {
+        var reply_click = document.getElementsByClassName('mapBtn').onclick;
+        // var btnID = event.target.id
+        console.log(reply_click);
+    })
+}
+        // function reply_click(clicked_id) {
+        //     alert(clicked_id);
+        // }
+        // var mapAddress = $("#divAdd" + ID).text();
+        // console.log(mapAddress);
+//     })
+
+
+// }
 
 
 // function mapThis() {
@@ -142,3 +153,4 @@ function checkLength(zipLocation) {
 // }
 
 // http://www.mapquestapi.com/geocoding/v1/address?key=xFxVU4pZGhIu50jG3PO7DQiBnQiPSWcG&location=
+
