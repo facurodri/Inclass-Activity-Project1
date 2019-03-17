@@ -3,18 +3,21 @@
     font-family: cursive;
     text-shadow: 2px 2px 3px rgb(144, 6, 29);
 }
-.banner {
+/* .banner {
     background-image: url(../assets/images/abstract-hearts-background.jpg);
- background-position: center;
+ /* background-position: center;
   background-size: cover;
-  box-shadow: 2px 5px 8px black;
-}
+  box-shadow: 2px 5px 8px black; 
+}*/
 .mainBody{
-    background-image: url(../assets/images/brick-wall-dark.png);
-    background-color: rgb(160, 155, 155);
-    background-size:15%;
-    background-position: bottom;
-    background-repeat: repeat;
+    background-image: url(../assets/images/gradientPic.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: auto;
+    
+}
+label {
+    color:rgb(224, 202, 202);
 }
 .card-header{
     font-size: 2rem;
@@ -22,6 +25,13 @@
     color: rgb(5, 5, 5);
     text-shadow: 2px 2px 2px white;
 }
+h1 {
+    font-size: 3.2rem;
+    line-height: 75%;
+    margin: .8rem 0 1.68rem 0;
+}
+
+
 
 .border-light{
     background-color: #fff;
@@ -34,7 +44,7 @@
     background-image: url(../assets/images/brokenice2.jpg);
     background-position: center;
     background-size: 33%;
-    border: 3px solid black;
+    border: 3px solid rgb(69, 161, 197);
 } 
 #jokeGen {
     color: rgb(5, 5, 5);
@@ -49,11 +59,11 @@
 #resultsSpace {
     float: left;
 }
-.form-group {
+/* .form-group {
     color:#fff;
-    text-shadow: 2px 2px 2px rgb(29, 0, 0);
+    text-shadow: 2px 2px 2px rgb(29, 0, 0); */
     
-}
+/* } */
 .modal {
     display: none; 
     position: relative; 
@@ -86,4 +96,9 @@
     text-decoration: none;
     cursor: pointer;
   }
-
+h1 {
+    color:red;
+}
+.navbarMain {
+    background-image: url(../assets/images/gradientPic.jpg);
+}

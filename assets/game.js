@@ -1,4 +1,9 @@
-// Initialize Firebase
+$(document).ready(function () {
+    console.log('mounted')
+           $('.dropdown-trigger').dropdown({ hover: false });
+     });
+ 
+ // Initialize Firebase
 var config = {
     apiKey: "AIzaSyDNAzAPsRxEWr0BTKS1vapd364ySRuCe-0",
     authDomain: "first-project-9f391.firebaseapp.com",
@@ -71,7 +76,9 @@ var config = {
         $("#login-email").val("");
         $("#login-pass").val("");
     })
- })
+ });
+
+ 
 // variables
 var establishmentType = "";
 var zipLocation = "";
