@@ -16,6 +16,10 @@
     height: auto;
     
 }
+
+.search-button {
+    margin: 0 0 20px 0;
+}
 label {
     color:rgb(224, 202, 202);
 }

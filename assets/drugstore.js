@@ -4,7 +4,9 @@ var latitude = "";
 var longitude = "";
 var mymap = "";
 
-$(document).ready(); {
+
+$(document).ready(function(){
+    $('select').formSelect();
     $('#zip-it').hide();
     getLocation();
 
@@ -44,7 +46,7 @@ $(document).ready(); {
                 marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone).openPopup();
             });
     });
-}
+})
 
 function invalidZIPModal() {
     var modal = document.getElementById('invalidZIPCode');
@@ -70,7 +72,7 @@ function getLocation() {
 function showPosition(position) {
     latitude = position.coords.latitude
     longitude = position.coords.longitude
-    $("#my-location").html("You are currently at latitude: " + latitude + " and longitude: " + longitude);
+    // $("#my-location").html("You are currently at latitude: " + latitude + " and longitude: " + longitude);
     initMap(latitude, longitude);
 }
 function initMap(latitude, longitude) {
