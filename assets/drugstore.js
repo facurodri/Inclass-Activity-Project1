@@ -7,6 +7,7 @@ var needZip = "false";
 
 $(document).ready(function () {
     $('select').formSelect();
+    $('.sidenav').sidenav();
     $('#zip-it').hide();
     getLocation();
 
