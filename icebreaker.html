@@ -5,81 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-       <!--Import Google Icon Font-->
-       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-       <!-- Compiled and minified CSS -->
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-       <!-- Compiled and minified JavaScript -->
-       <script src="https://code.jquery.com/jquery.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-       <!-- Css style Sheet-->
-       <link rel="stylesheet" type="text/css" href="assets/style.css">
-       <title>IceBreakers</title>
-       
-    </head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Css style Sheet-->
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <title>IceBreakers</title>
+
+</head>
+
 <body class="iceBreakerBody">
-<!-- Dropdown Structure -->
-<div class="navbar-fixed navbar">
-        <ul id="dropdown1" class="dropdown-content">
+    <!-- Dropdown Structure -->
+    <nav class="nav-wrapper navbarMain">
+        <a href="#" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
+        <a href="#" class="sidenav-trigger right" data-target="mobileLinks">
+            <i class="material-icons">menu</i>
+        </a>
+        <ul class="left hide-on-med-and-down">
+                <li><a href="#!">Account Name Here</a></li>
+         </ul>
+        <ul id="dropdown1" class="right hide-on-med-and-down">
             <li><a href="index.html">Restaurant Search</a></li>
             <li class="divider"></li>
             <li><a href="icebreaker.html">Break the Ice</a></li>
             <li class="divider"></li>
             <li><a href="#!">Rate Date</a></li>
             <li class="divider"></li>
-            <li><a href="#!">Devs First Date</a></li>
-            <li class="divider"></li>
             <li><a href="drugstore.html">Drugstore</a></li>
             <li class="divider"></li>
             <li><a href="loginPage.html">Login</a></li>
         </ul>
-        <nav>
-            <div class="nav-wrapper iceNav">
-                <ul class="left hide-on-med-and-down">
-                    <li><a href="#!">Account Name Here</a></li>
-                </ul>
-                <a href="#!" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
-                <ul class="right hide-on-sm-and-down">
-                    <!-- Dropdown Trigger -->
-                    <li><a class="dropdown-trigger" href="#!" data-toggle="dropdown" data-target="dropdown1"><i class="material-icons">menu</i></a></li>
-                </ul>
-            </div>
-        </nav>
+    </nav>
+    <ul class="sidenav" id="mobileLinks">
+        <li><a href="index.html">Restaurant Search</a></li>
+        <li class="divider"></li>
+        <li><a href="icebreaker.html">Break the Ice</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Rate Date</a></li>
+        <li class="divider"></li>
+        <li><a href="drugstore.html">Drugstore</a></li>
+        <li class="divider"></li>
+    </ul>
+    <div class="text center">
+        <h1 class="display-1">Ice Breakers!</h1>
     </div>
-            <div class="text center">
-                <h1 class="display-1">Ice Breakers!</h1>
-            </div>
-<div class ="continer">
-    <div class ="row">
-        <div class ="col s12 l12">
-                <div class="card icebreaker">
-                        <div class="card-header">Break the Ice!</div>
-                        <h4><span id="jokeQ"></span></h4>
-                        <h6><span id="jokeGen"></span></h6>
-                        <a href="#" class="card-link"> Next Joke</a>
-                        <a href="#collapse" role="button" data-toggle="jokeArea" aria-expanded="false"
-                            aria-controls="collapseExample"> Hide</a>
-                    </div>
-        </div>
+       <div class ="container">
+        <div class = "jokesContainer"></div>
     </div>
-</div>
- <div class="container jokeArea py-3">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card icebreaker">
-                    <div class="card-header">Break the Ice!</div>
-                    <h4><span id="jokeQ"></span></h4>
-                    <h6><span id="jokeGen"></span></h6>
-                    <a href="#" class="card-link"> Next Joke</a>
-                    <a href="#collapse" role="button" data-toggle="jokeArea" aria-expanded="false"
-                        aria-controls="collapseExample"> Hide</a>
-                </div>
-            </div>
-        </div>
-    </div>
-        
-
-
 
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>

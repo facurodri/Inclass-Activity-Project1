@@ -44,6 +44,9 @@ input {
   color:white;
   text-shadow: 1px 2px 2px rgb(121, 8, 8); 
 }
+#mymap {
+    height: 400px;
+}
 .card-header{
     font-size: 2rem;
     font-family: cursive;
@@ -122,4 +125,9 @@ h1 {
 
 .navbarMain {
     background-image: url(../assets/images/gradientPic.jpg);
+}
+.jokes {
+    float: left;
+    margin:5px;
+    padding:10px;
 }
