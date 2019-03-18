@@ -12,7 +12,7 @@ var config = {
  
  //get data
  firebase.firestore().collection("first-project").get().then(snapshot => {
-   console.log(snapshot.docs)
+//    console.log(snapshot.docs)
  });
  
  
@@ -20,9 +20,9 @@ var config = {
  firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         // User is signed in.
-        console.log("user logged in: " + user)
+        // console.log("user logged in: " + user)
     } else {
-        console.log("user logged out");
+        // console.log("user logged out");
     }
  });
  
@@ -65,7 +65,7 @@ var config = {
     const pass = $("#login-pass").val().trim();
  
     firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
-        console.log(cred.user)
+        // console.log(cred.user)
         //SEND TO MAIN PAGE 
         window.location.href = "index.html";
  
@@ -90,7 +90,7 @@ function displayJokes() {
         method: "GET"
     })
         .then(function (response) {
-            console.log(response);
+            // console.log(response);
             var results = response;
             // cycle through each of the elements of the results array
             for (i = 0; i < results.length; i++) {
@@ -112,20 +112,17 @@ $("#launch-search").on("click", function (event) {
     event.preventDefault();
     $("#resultsSpace").empty();
     var establishmentType = $("#establishment-input").val().trim();
-    console.log(establishmentType);
+    // console.log(establishmentType);
     var zipLocation = $("#location-input").val().trim();
     checkLength();
-    console.log(zipLocation);
+    // console.log(zipLocation);
     var searchMiles = $("#radius-input").val().trim();
-    console.log(searchMiles);
+    // console.log(searchMiles);
     var costRange = $("#cost-input").val().trim();
-    console.log(costRange);
+    // console.log(costRange);
     var searchRadius = searchMiles * 1600;
-    console.log(searchRadius);
-    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=10&";
-    // var queryURL = "https://api.yelp.com/v3/businesses/search?location=cleveland";
-    // var queryURL = "https://api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=5&";
-    // var queryURL = "https://api.yelp.com/v3/businesses/search?"
+    // console.log(searchRadius);
+    var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=10&";
     $.ajax({
         url: queryURL,
         method: 'GET',
@@ -136,21 +133,33 @@ $("#launch-search").on("click", function (event) {
     })
         .then(function (response) {
             console.log(response);
-            for (var j = 0; j < 10; j++) {
+            var centerLat = response.region.center.latitude;
+            var centerLong = response.region.center.longitude;
+            // var myMap = initMap(centerLat, centerLong);
+            console.log("latitude: ", centerLat, "longitude: ", centerLong);
+            for (var j = 0; j < 5; j++) {
                 var restaurantName = response.businesses[j].name;
-                console.log(restaurantName);
                 var restaurantAddress = response.businesses[j].location.address1 + ", " + response.businesses[j].location.city + ", " + response.businesses[j].location.state + " " + response.businesses[j].location.zip_code;
-                console.log(restaurantAddress);
                 var restaurantPhone = response.businesses[j].display_phone;
-                console.log(restaurantPhone);
                 var restaurantRating = response.businesses[j].rating;
-                console.log("Rating: " + restaurantRating);
                 var ID = response.businesses[j].id;
-                console.log("ID = " + ID);
+                var latitude = response.businesses[j].coordinates.latitude;
+                var longitude = response.businesses[j].coordinates.longitude;
+                console.log(restaurantName, "latitude: " + latitude, "longitude: " + longitude);
                 createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating, ID);
+                // drawMap(myMap, latitude, longitude);
             };
         })
 });
+
+// function initMap (centerLat, centerLong) {
+    // return L.map('mapid').setView([centerLat, centerLong], 13)
+// }
+
+// function drawMap (myMap, latitude, longitude) {
+//     var marker = L.marker([latitude, longitude]).addTo(myMap);
+//     marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+// }
 
 function createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating, ID) {
     var cardDiv = $('<div class="card border-light mb-3" "width:18rem;">');
@@ -159,8 +168,6 @@ function createSearchCard(restaurantName, restaurantAddress, restaurantPhone, re
     var restPhone = $("<div class ='card-text' id='divPhone" + ID + "'>").text(restaurantPhone);
     var restRating = $("<div class ='card-text' id='divRating" + ID + "'>").text(restaurantRating);
     var mapButton = $("<button type='button' class='mapBtn' data-name='" + ID + "'>").text("Map this");
-
-    
     cardDiv.append(restName);
     cardDiv.append(restAddress);
     cardDiv.append(restPhone);
@@ -195,7 +202,7 @@ function createMapQuery(ID) {
     $(".mapBtn").on("click", function () {
         var reply_click = document.getElementsByClassName('mapBtn').onclick;
         // var btnID = event.target.id
-        console.log(reply_click);
+        // console.log(reply_click);
     })
 }
         // function reply_click(clicked_id) {

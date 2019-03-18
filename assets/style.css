@@ -16,6 +16,9 @@
     background-position: bottom;
     background-repeat: repeat;
 }
+#mymap {
+    height: 400px;
+}
 .card-header{
     font-size: 2rem;
     font-family: cursive;
