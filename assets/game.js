@@ -1,4 +1,9 @@
-// Initialize Firebase
+$(document).ready(function () {
+    console.log('mounted')
+           $('.dropdown-trigger').dropdown({ hover: false });
+     });
+ 
+ // Initialize Firebase
 var config = {
     apiKey: "AIzaSyDNAzAPsRxEWr0BTKS1vapd364ySRuCe-0",
     authDomain: "first-project-9f391.firebaseapp.com",
@@ -7,7 +12,6 @@ var config = {
     storageBucket: "first-project-9f391.appspot.com",
     messagingSenderId: "290744685174"
  };
-
  firebase.initializeApp(config);
  
  //get data
@@ -72,7 +76,9 @@ var config = {
         $("#login-email").val("");
         $("#login-pass").val("");
     })
- })
+ });
+
+ 
 // variables
 var establishmentType = "";
 var zipLocation = "";
@@ -205,31 +211,3 @@ function createMapQuery(ID) {
         // console.log(reply_click);
     })
 }
-        // function reply_click(clicked_id) {
-        //     alert(clicked_id);
-        // }
-        // var mapAddress = $("#divAdd" + ID).text();
-        // console.log(mapAddress);
-//     })
-
-
-// }
-
-
-// function mapThis() {
-//     $.ajax({
-//         url: mapQueryURL,
-//         method: "GET"
-//     })
-//         .then(function (response) {
-//             console.log(response);
-//             var results = response;
-//             // cycle through each of the elements of the results array
-//             for (i = 0; i < results.length; i++) {
-
-//             }
-//         });
-// }
-
-// http://www.mapquestapi.com/geocoding/v1/address?key=xFxVU4pZGhIu50jG3PO7DQiBnQiPSWcG&location=
-

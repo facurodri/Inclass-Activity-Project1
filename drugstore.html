@@ -5,14 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <title>Yelp </title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Css style Sheet-->
     <link rel="stylesheet" type="text/css" href="assets/style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
         integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-        crossorigin="" />
-    <!-- Make sure you put this AFTER Leaflet's CSS -->
-
+        crossorigin="">
+    <title>Drugstore Page</title>
 </head>
 
 <body>
@@ -49,22 +54,57 @@
             <div id="my-location"></div>
         </div>
         <div id="invalidZIPCode" class="modal">
-                <div class="modal-content">
-                    <p>Sir Topham Hatt Says: "You have caused confusion and delay! Please go back and complete all
-                        fields."<br>(Click to close)</p>
-                </div>
+            <div class="modal-content">
+                <p>Sir Topham Hatt Says: "You have caused confusion and delay! Please go back and complete all
+                    fields."<br>(Click to close)</p>
             </div>
-                <div class="col-md-12">
+        </div>
+        <div class="col-md-12">
             <div id="mymap">map here</div>
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="assets/drugstore.js"></script>
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-        crossorigin=""></script>
+    <body class="mainBody">
+        <!-- Dropdown Structure -->
+        <div class="navbar-fixed navbarMain">
+            <ul id="dropdown1" class="dropdown-content">
+                <li><a href="index.html">Restaurant Search</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">Break the Ice</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">Rate Date</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">Devs First Date</a></li>
+                <li class="divider"></li>
+                <li><a href="loginPage.html">Login</a></li>
+            </ul>
+            <nav>
+                <div class="nav-wrapper navbarMain">
+                    <ul class="left hide-on-med-and-down">
+                        <li><a href="#!">Account Name Here</a></li>
+                    </ul>
+                    <a href="#!" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
+                    <ul class="right hide-on-sm-and-down">
+                        <!-- Dropdown Trigger -->
+                        <li><a class="dropdown-trigger" href="#!" data-toggle="dropdown" data-target="dropdown1"><i
+                                    class="material-icons">menu</i></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="container">
 
-</body>
+            <h1>Drugstore</h1>
+
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="assets/drugstore.js"></script>
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+            integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+            crossorigin=""></script>
+    </body>
 
 </html>
