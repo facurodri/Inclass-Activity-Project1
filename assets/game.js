@@ -1,7 +1,7 @@
 //Gets materialize ready to use when page loads
 $(document).ready(function () {
            $(".sidenav").sidenav();
-           $('select').fromSelect();
+           $("select").fromSelect();
      });
  
  // Initialize Firebase

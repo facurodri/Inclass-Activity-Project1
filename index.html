@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-       <!--Import Google Icon Font-->
-       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-       <!-- Compiled and minified CSS -->
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-       <!-- Compiled and minified JavaScript -->
-       <script src="https://code.jquery.com/jquery.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-       <!-- Css style Sheet-->
-       <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Css style Sheet-->
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
     <title>Home Page</title>
 
 </head>
@@ -52,21 +52,6 @@
     <div class="text center">
         <h1 class="display-1">Search The Night Away</h1>
     </div>
-
-    <!-- <div class="container jokeArea py-3">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card icebreaker">
-                    <div class="card-header">Break the Ice!</div>
-                    <h4><span id="jokeQ"></span></h4>
-                    <h6><span id="jokeGen"></span></h6>
-                    <a href="#" class="card-link"> Next Joke</a>
-                    <a href="#collapse" role="button" data-toggle="jokeArea" aria-expanded="false"
-                        aria-controls="collapseExample"> Hide</a>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="container py-3">
         <div class="row">
             <div class="col-md-6 col-sm-4">
@@ -85,9 +70,10 @@
                         <label for="radius"><strong>Radius (between 1 and 25 miles)</strong></label>
                         <input type="number" class="form-control" id="radius-input" value="10" max="25" min="1">
                     </div>
-                    <div class="form-group">
-                        <label for="cost"><strong>Cost range ($ $$ $$$)</strong></label>
-                        <select type="text" class="form-control" id="cost-input" name="priceRange">
+                    <div class="input-field col s12">
+                        <label>$ $$ $$$</label>
+                        <select id="cost-input" type="text">
+                            <option value="" disabled selected>Choose your cost range</option>
                             <option value="1">$</option>
                             <option value="2">$$</option>
                             <option value="3">$$$</option>
