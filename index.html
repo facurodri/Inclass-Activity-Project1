@@ -5,44 +5,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-       <!--Import Google Icon Font-->
-       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-       <!-- Compiled and minified CSS -->
-       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-       <!-- Compiled and minified JavaScript -->
-       <script src="https://code.jquery.com/jquery.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-       <!-- Css style Sheet-->
-       <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- Css style Sheet-->
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
     <title>Home Page</title>
 
 </head>
 <!-- Dropdown Structure -->
 <div class="navbar-fixed navbarMain">
-        <ul id="dropdown1" class="dropdown-content">
-            <li><a href="index.html">Restaurant Search</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">Break the Ice</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">Rate Date</a></li>
-            <li class="divider"></li>
-            <li><a href="#!">Devs First Date</a></li>
-            <li class="divider"></li>
-            <li><a href="loginPage.html">Login</a></li>
-        </ul>
-        <nav>
-            <div class="nav-wrapper navbarMain">
-                <ul class="left hide-on-med-and-down">
-                    <li><a href="#!">Account Name Here</a></li>
-                </ul>
-                <a href="#!" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
-                <ul class="right hide-on-sm-and-down">
-                    <!-- Dropdown Trigger -->
-                    <li><a class="dropdown-trigger" href="#!" data-toggle="dropdown" data-target="dropdown1"><i class="material-icons">menu</i></a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a href="index.html">Restaurant Search</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Break the Ice</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Rate Date</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Devs First Date</a></li>
+        <li class="divider"></li>
+        <li><a href="loginPage.html">Login</a></li>
+    </ul>
+    <nav>
+        <div class="nav-wrapper navbarMain">
+            <ul class="left hide-on-med-and-down">
+                <li><a href="#!">Account Name Here</a></li>
+            </ul>
+            <a href="#!" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
+            <ul class="right hide-on-sm-and-down">
+                <!-- Dropdown Trigger -->
+                <li><a class="dropdown-trigger" href="#!" data-toggle="dropdown" data-target="dropdown1"><i
+                            class="material-icons">menu</i></a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
 <body class="mainBody">
     <div class="text center">
         <h1 class="display-1">First Date App!</h1>
@@ -80,9 +82,18 @@
                         <label for="radius"><strong>Radius (between 1 and 25 miles)</strong></label>
                         <input type="number" class="form-control" id="radius-input" value="10" max="25" min="1">
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="cost"><strong>Cost range ($ $$ $$$)</strong></label>
                         <select type="text" class="form-control" id="cost-input" name="priceRange">
+                            <option value="1">$</option>
+                            <option value="2">$$</option>
+                            <option value="3">$$$</option>
+                        </select>
+                    </div> -->
+                    <div class="input-field col s12">
+                        <label>$ $$ $$$</label>
+                        <select id="cost-input" type="text">
+                            <option value="" disabled selected>Choose your cost range</option>
                             <option value="1">$</option>
                             <option value="2">$$</option>
                             <option value="3">$$$</option>
