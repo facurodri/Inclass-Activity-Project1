@@ -9,6 +9,11 @@
   background-size: cover;
   box-shadow: 2px 5px 8px black; 
 }*/
+.iceNav {
+    background-image: url(../assets/images/BlueGradient2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 .mainBody{
     background-image: url(../assets/images/gradientPic.jpg);
     background-size: cover;
@@ -16,12 +21,30 @@
     height: auto;
     
 }
-
+.iceBreakerBody{
+    background-image: url(../assets/images/BlueGradient2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: auto;
+    /* width: 100%;  */
+}
 .search-button {
     margin: 0 0 20px 0;
 }
+
 label {
-    color:rgb(224, 202, 202);
+    font-size: 100%;
+    color:rgb(255, 255, 255);
+    text-shadow: 1px 2px 2px black;
+}
+button {
+    float: left;
+    margin: 4px; 
+    text-shadow: 1px 2px 2px rgb(121, 8, 8);
+}
+input {
+  color:white;
+  text-shadow: 1px 2px 2px rgb(121, 8, 8); 
 }
 #mymap {
     height: 400px;
@@ -37,8 +60,6 @@ h1 {
     line-height: 75%;
     margin: .8rem 0 1.68rem 0;
 }
-
-
 
 .border-light{
     background-color: #fff;
@@ -103,9 +124,12 @@ h1 {
     text-decoration: none;
     cursor: pointer;
   }
-h1 {
-    color:red;
-}
+
 .navbarMain {
     background-image: url(../assets/images/gradientPic.jpg);
+}
+.jokes {
+    float: left;
+    margin:5px;
+    padding:10px;
 }

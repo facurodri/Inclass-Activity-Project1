@@ -1,6 +1,7 @@
+//Gets materialize ready to use when page loads
 $(document).ready(function () {
-    console.log('mounted')
-           $('.dropdown-trigger').dropdown({ hover: false });
+           $(".sidenav").sidenav();
+           $("select").fromSelect();
      });
  
  // Initialize Firebase
@@ -87,6 +88,7 @@ var costRange = "";
 var jokeQ = "";
 var punchLine = "";
 var mapAddress = "";
+var resultsJoke=[];
 
 function displayJokes() {
     var queryURL = "https://official-joke-api.appspot.com/random_ten";
@@ -97,12 +99,22 @@ function displayJokes() {
     })
         .then(function (response) {
             // console.log(response);
-            var results = response;
+            resultsJoke = response;
             // cycle through each of the elements of the results array
-            for (i = 0; i < results.length; i++) {
+            for (i = 0; i < resultsJoke.length; i++) {
 
-                jokeQ = $("#jokeQ").text(results[i].setup);
-                punchLine = $("#jokeGen").text(results[i].punchline);
+                var jokeDiv = $("<div class='card center'>");
+                jokeDiv.addClass("jokes col l4 m6 s12")
+                jokeDiv.append("<div ='card-content'>");
+                jokeQ = resultsJoke[i].setup;
+                var jQ = $("<p>").text(jokeQ);
+                jokeDiv.append(jQ);
+
+                punchLine = resultsJoke[i].punchline;
+                var pL = $("<p>").text(punchLine);
+                jokeDiv.append(pL);
+            
+                $(".jokesContainer").append(jokeDiv);
 
             }
         });

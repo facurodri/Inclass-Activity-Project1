@@ -18,51 +18,39 @@
 
 </head>
 <!-- Dropdown Structure -->
-<div class="navbar-fixed navbarMain">
-    <ul id="dropdown1" class="dropdown-content">
+<nav class ="nav-wrapper navbarMain">
+        <a href ="#" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
+        <a href ="#" class="sidenav-trigger right" data-target="mobileLinks">
+            <i class ="material-icons">menu</i>
+        </a>
+        <ul class="left hide-on-med-and-down">
+                <li><a href="#!">Account Name Here</a></li>
+         </ul>
+        <ul id="dropdown1" class="right hide-on-med-and-down">
+                <li><a href="index.html">Restaurant Search</a></li>
+                <li class="divider"></li>
+                <li><a href="icebreaker.html">Break the Ice</a></li>
+                <li class="divider"></li>
+                <li><a href="#!">Rate Date</a></li>
+                <li class="divider"></li>
+                <li><a href="drugstore.html">Drugstore</a></li>
+                <li class="divider"></li>
+                <li><a href="loginPage.html">Login</a></li>
+            </ul>
+        </nav>
+<ul class ="sidenav" id="mobileLinks">
         <li><a href="index.html">Restaurant Search</a></li>
         <li class="divider"></li>
-        <li><a href="#!">Break the Ice</a></li>
+        <li><a href="icebreaker.html">Break the Ice</a></li>
         <li class="divider"></li>
         <li><a href="#!">Rate Date</a></li>
         <li class="divider"></li>
-        <li><a href="#!">Devs First Date</a></li>
+        <li><a href="drugstore.html">Drugstore</a></li>
         <li class="divider"></li>
-        <li><a href="loginPage.html">Login</a></li>
-    </ul>
-    <nav>
-        <div class="nav-wrapper navbarMain">
-            <ul class="left hide-on-med-and-down">
-                <li><a href="#!">Account Name Here</a></li>
-            </ul>
-            <a href="#!" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
-            <ul class="right hide-on-sm-and-down">
-                <!-- Dropdown Trigger -->
-                <li><a class="dropdown-trigger" href="#!" data-toggle="dropdown" data-target="dropdown1"><i
-                            class="material-icons">menu</i></a></li>
-            </ul>
-        </div>
-    </nav>
-</div>
-
+</ul>
 <body class="mainBody">
     <div class="text center">
-        <h1 class="display-1">First Date App!</h1>
-    </div>
-
-    <div class="container jokeArea py-3">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card icebreaker">
-                    <div class="card-header">Break the Ice!</div>
-                    <h4><span id="jokeQ"></span></h4>
-                    <h6><span id="jokeGen"></span></h6>
-                    <a href="#" class="card-link"> Next Joke</a>
-                    <a href="#collapse" role="button" data-toggle="jokeArea" aria-expanded="false"
-                        aria-controls="collapseExample"> Hide</a>
-                </div>
-            </div>
-        </div>
+        <h1 class="display-1">Search The Night Away</h1>
     </div>
     <div class="container py-3">
         <div class="row">
@@ -82,14 +70,6 @@
                         <label for="radius"><strong>Radius (between 1 and 25 miles)</strong></label>
                         <input type="number" class="form-control" id="radius-input" value="10" max="25" min="1">
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="cost"><strong>Cost range ($ $$ $$$)</strong></label>
-                        <select type="text" class="form-control" id="cost-input" name="priceRange">
-                            <option value="1">$</option>
-                            <option value="2">$$</option>
-                            <option value="3">$$$</option>
-                        </select>
-                    </div> -->
                     <div class="input-field col s12">
                         <label>$ $$ $$$</label>
                         <select id="cost-input" type="text">
@@ -100,7 +80,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <button class="btn-primary" id="launch-search" type="submit">Submit</button></td>
+                        <button class="btn #ff6f00 amber darken-2 waves-effect waves-light hoverable" id="launch-search" type="submit">Submit</button></td>
                     </div>
                 </form>
                 <div id="invalidZIPCode" class="modal">
@@ -108,9 +88,7 @@
                         <p>Please enter a valid ZIP code<br>(Click to close)</p>
                     </div>
                 </div>
-
             </div>
-
             <div class="col-md-6">
                 <div id="resultsSpace"></div>
             </div>
