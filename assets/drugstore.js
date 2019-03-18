@@ -3,9 +3,9 @@ var establishmentType = "";
 var latitude = "";
 var longitude = "";
 var mymap = "";
+var needZip = "false";
 
-
-$(document).ready(function(){
+$(document).ready(function () {
     $('select').formSelect();
     $('#zip-it').hide();
     getLocation();
@@ -16,7 +16,12 @@ $(document).ready(function(){
         // marker.clearLayers();
         // initMap(latitude, longitude);
         var drugStore = $("#store-input").val().trim();
-        var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&latitude=" + latitude + "&longitude=" + longitude + "&radius=16000&limit=10&";
+        if (needZip === "true") {
+            var zipLocation = $("#location-input").val().trim();
+            var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&location=" + zipLocation + "&radius=16000&limit=10&";
+        } else {
+            var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&latitude=" + latitude + "&longitude=" + longitude + "&radius=16000&limit=10&";
+        }
         $.ajax({
             url: queryURL,
             method: 'GET',
@@ -48,31 +53,17 @@ $(document).ready(function(){
     });
 })
 
-function invalidZIPModal() {
-    var modal = document.getElementById('invalidZIPCode');
-    modal.style.display = "block";
-    modal.onclick = function () {
-        modal.style.display = "none";
-    }
-}
-function checkLength(zipLocation) {
-    var zip = $("#location-input").val().trim();
-    if (zip.length != 5) {
-        invalidZIPModal();
-    }
-}
-
 function getLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
     } else {
         $('#zip-it').style.display = "block";
+        needZip = "true";
     }
 }
 function showPosition(position) {
     latitude = position.coords.latitude
     longitude = position.coords.longitude
-    // $("#my-location").html("You are currently at latitude: " + latitude + " and longitude: " + longitude);
     initMap(latitude, longitude);
 }
 function initMap(latitude, longitude) {

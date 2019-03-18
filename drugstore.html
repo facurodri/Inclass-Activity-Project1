@@ -14,95 +14,90 @@
     <!-- Css style Sheet-->
     <link rel="stylesheet" type="text/css" href="assets/style.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
-    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
-    crossorigin="">
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin="">
     <title>Drugstore Page</title>
 </head>
 
 <!-- <body> -->
-    
-    <body class="mainBody">
-        <!-- Dropdown Structure -->
-        <div class="navbar-fixed navbarMain">
-            <ul id="dropdown1" class="dropdown-content">
-                <li><a href="index.html">Restaurant Search</a></li>
-                <li class="divider"></li>
-                <li><a href="#!">Break the Ice</a></li>
-                <li class="divider"></li>
-                <li><a href="#!">Rate Date</a></li>
-                <li class="divider"></li>
-                <li><a href="#!">Devs First Date</a></li>
-                <li class="divider"></li>
-                <li><a href="loginPage.html">Login</a></li>
-            </ul>
-            <nav>
-                <div class="nav-wrapper navbarMain">
-                    <ul class="left hide-on-med-and-down">
-                        <li><a href="#!">Account Name Here</a></li>
-                    </ul>
-                    <a href="#!" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
-                    <ul class="right hide-on-sm-and-down">
-                        <!-- Dropdown Trigger -->
-                        <li><a class="dropdown-trigger" href="#!" data-toggle="dropdown" data-target="dropdown1"><i
-                            class="material-icons">menu</i></a></li>
-                        </ul>
-                    </div>
-                </nav>
+
+<body class="mainBody">
+    <!-- Dropdown Structure -->
+    <div class="navbar-fixed navbarMain">
+        <ul id="dropdown1" class="dropdown-content">
+            <li><a href="index.html">Restaurant Search</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">Break the Ice</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">Rate Date</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">Devs First Date</a></li>
+            <li class="divider"></li>
+            <li><a href="loginPage.html">Login</a></li>
+        </ul>
+        <nav>
+            <div class="nav-wrapper navbarMain">
+                <ul class="left hide-on-med-and-down">
+                    <li><a href="#!">Account Name Here</a></li>
+                </ul>
+                <a href="#!" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
+                <ul class="right hide-on-sm-and-down">
+                    <!-- Dropdown Trigger -->
+                    <li><a class="dropdown-trigger" href="#!" data-toggle="dropdown" data-target="dropdown1"><i
+                                class="material-icons">menu</i></a></li>
+                </ul>
             </div>
-            <div class="container">
-                
-                <h1>Drugstore</h1>
-                
+        </nav>
+    </div>
+    <div class="container">
+
+        <h1>Drugstore</h1>
+
+    </div>
+    <div class="container addSearch">
+        <div class="col-lg-12 table-header"></div>
+        <form>
+            <div class="form-group">
+                <label for="drugstoreChain"><strong>Which drugstore do you prefer?</strong></label>
+                <select type="text" class="form-control" id="store-input" name="storeName">
+                    <option value="CVS">CVS</option>
+                    <option value="Rite-Aid">Rite-Aid</option>
+                    <option value="Walgreen's">Walgreen's</option>
+                    <option value="Target">Target</option>
+                    <option value="Walmart">Walmart</option>
+                </select>
             </div>
-            <div class="container addSearch">
-                <div class="col-lg-12 table-header"></div>
-                <form>
-                    <div class="form-group">
-                        <label for="drugstoreChain"><strong>Which drugstore do you prefer?</strong></label>
-                        <select type="text" class="form-control" id="store-input" name="storeName">
-                            <option value="CVS">CVS</option>
-                            <option value="Rite-Aid">Rite-Aid</option>
-                            <option value="Walgreen's">Walgreen's</option>
-                            <option value="Target">Target</option>
-                            <option value="Walmart">Walmart</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="zip-it">
-                        <label for="location"><strong>ZIP Code</strong></label>
-                        <input type="text" class="form-control" id="location-input" maxlength="5" minlength="5" visible="false"
-                        placeholder="Geolocation is not supported by this browser. Please enter ZIP code"
-                        pattern="[0-9]{5}">
-                    </div>
-                    <div class="form-group">
-                        <button class="btn #ff6f00 amber darken-2 waves-effect waves-light hoverable search-button" id="launch-search" type="submit">Submit</button></td>
-                    </div>
-                    <div class="form-group" id="my-location">
-                    </div>
-                </form>
-                <div class="col m6">
-                    <div id="my-location"></div>
-                </div>
-                <div id="invalidZIPCode" class="modal">
-                    <div class="modal-content">
-                        <p>Sir Topham Hatt Says: "You have caused confusion and delay! Please go back and complete all
-                            fields."<br>(Click to close)</p>
-                        </div>
-                    </div>
-                    <div class="col m12">
-                        <div id="mymap"></div>
-                    </div>
-                </div>
+            <div class="form-group" id="zip-it">
+                <label for="location"><strong>ZIP Code</strong></label>
+                <input type="text" class="form-control" id="location-input" maxlength="5" minlength="5" visible="false"
+                    placeholder="Geolocation is not supported by this browser. Please enter ZIP code"
+                    pattern="[0-9]{5}">
             </div>
-                
-                <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
-                <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
-                <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
-                <script src="https://code.jquery.com/jquery.js"></script>
-                <script src="assets/drugstore.js"></script>
-                <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
-                integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
-                crossorigin=""></script>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            </body>
-            
-            </html>
+            <div class="form-group">
+                <button class="btn #ff6f00 amber darken-2 waves-effect waves-light hoverable search-button"
+                    id="launch-search" type="submit">Submit</button></td>
+            </div>
+            <!-- <div class="form-group" id="my-location">
+            </div> -->
+        </form>
+        <div class="col m6">
+            <div id="my-location"></div>
+        </div>
+        <div class="col m12">
+            <div id="mymap"></div>
+        </div>
+    </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="assets/drugstore.js"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
