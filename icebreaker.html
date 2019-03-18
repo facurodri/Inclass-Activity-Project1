@@ -14,11 +14,12 @@
        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
        <!-- Css style Sheet-->
        <link rel="stylesheet" type="text/css" href="assets/style.css">
-    <title>Home Page</title>
-
-</head>
+       <title>IceBreakers</title>
+       
+    </head>
+<body class="iceBreakerBody">
 <!-- Dropdown Structure -->
-<div class="navbar-fixed navbarMain">
+<div class="navbar-fixed navbar">
         <ul id="dropdown1" class="dropdown-content">
             <li><a href="index.html">Restaurant Search</a></li>
             <li class="divider"></li>
@@ -33,7 +34,7 @@
             <li><a href="loginPage.html">Login</a></li>
         </ul>
         <nav>
-            <div class="nav-wrapper navbarMain">
+            <div class="nav-wrapper iceNav">
                 <ul class="left hide-on-med-and-down">
                     <li><a href="#!">Account Name Here</a></li>
                 </ul>
@@ -45,12 +46,24 @@
             </div>
         </nav>
     </div>
-<body class="mainBody">
-    <div class="text center">
-        <h1 class="display-1">Search The Night Away</h1>
+            <div class="text center">
+                <h1 class="display-1">Ice Breakers!</h1>
+            </div>
+<div class ="continer">
+    <div class ="row">
+        <div class ="col s12 l12">
+                <div class="card icebreaker">
+                        <div class="card-header">Break the Ice!</div>
+                        <h4><span id="jokeQ"></span></h4>
+                        <h6><span id="jokeGen"></span></h6>
+                        <a href="#" class="card-link"> Next Joke</a>
+                        <a href="#collapse" role="button" data-toggle="jokeArea" aria-expanded="false"
+                            aria-controls="collapseExample"> Hide</a>
+                    </div>
+        </div>
     </div>
-
-    <!-- <div class="container jokeArea py-3">
+</div>
+ <div class="container jokeArea py-3">
         <div class="row">
             <div class="col-md-12">
                 <div class="card icebreaker">
@@ -63,48 +76,11 @@
                 </div>
             </div>
         </div>
-    </div> -->
-    <div class="container py-3">
-        <div class="row">
-            <div class="col-md-6 col-sm-4">
-                <form>
-                    <div class="form-group">
-                        <label for="establishmentType"><strong>Type of Establishment</strong></label>
-                        <input type="text" class="form-control" id="establishment-input"
-                            placeholder="Italian, Coffee, Ice Cream, etc.">
-                    </div>
-                    <div class="form-group">
-                        <label for="location"><strong>ZIP Code</strong></label>
-                        <input type="text" class="form-control" id="location-input" maxlength="5" minlength="5"
-                            placeholder="00000" pattern="[0-9]{5}">
-                    </div>
-                    <div class="form-group">
-                        <label for="radius"><strong>Radius (between 1 and 25 miles)</strong></label>
-                        <input type="number" class="form-control" id="radius-input" value="10" max="25" min="1">
-                    </div>
-                    <div class="form-group">
-                        <label for="cost"><strong>Cost range ($ $$ $$$)</strong></label>
-                        <select type="text" class="form-control" id="cost-input" name="priceRange">
-                            <option value="1">$</option>
-                            <option value="2">$$</option>
-                            <option value="3">$$$</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn #ff6f00 amber darken-2 waves-effect waves-light hoverable" id="launch-search" type="submit">Submit</button></td>
-                    </div>
-                </form>
-                <div id="invalidZIPCode" class="modal">
-                    <div class="modal-content">
-                        <p>Please enter a valid ZIP code<br>(Click to close)</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div id="resultsSpace"></div>
-            </div>
-        </div>
     </div>
+        
+
+
+
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>

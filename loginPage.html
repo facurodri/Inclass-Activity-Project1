@@ -18,15 +18,17 @@
 
 </head>
 <!-- Dropdown Structure -->
-<div class="navbar-fixed navbarMain">
+<div class="navbar-fixed navbarMain red-text">
     <ul id="dropdown1" class="dropdown-content">
         <li><a href="index.html">Restaurant Search</a></li>
         <li class="divider"></li>
-        <li><a href="#!">Break the Ice</a></li>
+        <li><a href="icebreaker.html">Break the Ice</a></li>
         <li class="divider"></li>
         <li><a href="#!">Rate Date</a></li>
         <li class="divider"></li>
         <li><a href="#!">Devs First Date</a></li>
+        <li class="divider"></li>
+        <li><a href="drugstore.html">Drugstore</a></li>
         <li class="divider"></li>
         <li><a href="loginPage.html">Login</a></li>
     </ul>
@@ -50,12 +52,11 @@
         <h1 class="display-1 center">First Date App!</h1>
     </div>
     <br>
-    <div class="container">
+    <div class="container valign-wrapper center">
         <div class="row">
-            <div class="col s0 m3"></div>
-            <div class="col s12 m6 center-align">
+            <div class="col s12 m12 center-align">
                 <form>
-                    <div class="form-group blue-text text-darken-2">
+                    <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input type="email" class="form-control" id="login-email" aria-describedby="emailHelp"
                             placeholder="Enter email">
@@ -71,19 +72,20 @@
                         </label>
                     </div>
                     <br>
-                    <button class="btn waves-effect waves-light" class="center-align" id="log-in" type="submit"
-                        name="action">Log In
-                        <i class="material-icons right">send</i>
+                    <button class="btn #e53935 red darken-1 center-align waves-effect waves-light hoverable" id="log-in"
+                        type="submit" name="action">Log In<i class="material-icons right">account_circle</i>
+                    </button>
+                    <button class="btn #ff5722 deep-orange waves-effect waves-light hoverable" id="skip">SKIP<i class="material-icons right">arrow_forward</i></button>
+                    <button class="btn #ff6f00 amber darken-2 waves-effect waves-light hoverable scale-transition" id="sign-up" type="submit"
+                        name="action">Join Us!<i class="material-icons right">add_circle</i>
                     </button>
                 </form>
             </div>
-            <div class="col s0 m3"></div>
         </div>
-        <!-- </div> -->
-
+    </div>
+    <div class="container valign-wrapper center scale-transition scale-in hide">
         <div class="row">
-            <div class="col s0 m3"></div>
-            <div class="col s12 m6">
+            <div class="col s12 m12">
                 <form class="needs-validation" novalidate>
                     <div class="form-row center-align">
                         <div>
@@ -112,16 +114,16 @@
                         <button class="btn waves-effect waves-light" id="sign-up" type="submit" name="action">Submit
                             <i class="material-icons right">sign</i>
                         </button>
-                    </form>
-                    <br>
-                    <br>
-                    <button class="btn center-align" id="skip">SKIP</button>
-                    <button class="btn center-align" id="log-out">LOGOUT</button>
+                </form>
+                <br>
+                <br>
+                <!-- <button class="btn center-align" id="log-out">LOGOUT</button> -->
                 <!-- <button data-toggle="modal" data-target="#exampleModal" class="btn center"
                     >SIGNUP</button> -->
-                <div class="col s0 m3"></div>
+
             </div>
         </div>
+    </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
