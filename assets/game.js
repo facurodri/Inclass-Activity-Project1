@@ -124,6 +124,7 @@ $(".card-link").on("click", function () {
 })
 
 displayJokes();
+newSearch();
 
 $("#launch-search").on("click", function (event) {
     event.preventDefault();
@@ -147,6 +148,8 @@ $("#launch-search").on("click", function (event) {
             var centerLat = response.region.center.latitude;
             var centerLong = response.region.center.longitude;
             initMap(centerLat, centerLong);
+            $("#searchField").hide();
+            $("#new-search").show();
             console.log("latitude: ", centerLat, "longitude: ", centerLong);
             for (var j = 1; j < response.businesses.length; j++) {
                 var restaurantName = response.businesses[j].name;
@@ -170,24 +173,30 @@ $("#launch-search").on("click", function (event) {
             marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
             marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone + "<br>Yelp rating: " + restaurantRating).openPopup();
         });
-    });
+});
 
-    function initMap(centerLat, centerLong) {
-        mymap = L.map("mymap").setView([centerLat, centerLong], 13);
-        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-            maxZoom: 18,
-            id: 'mapbox.streets',
-            accessToken: 'sk.eyJ1IjoiZWhhYnJhc3VsIiwiYSI6ImNqdDlhZTIzczAxemc0NHBtYXJzd2hrN2oifQ.zvIfEYP1713Hn7KORi25Nw'
-        }).addTo(mymap);
-        // var marker = L.marker([centerLat, centerLong]).addTo(mymap);
-        // marker.bindPopup("<b>You are here").openPopup();
-    }
-    function drawPins(restaurantLatitude, restaurantLongitude) {
-        var marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
-        marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone).openPopup();
-    }
-    
+function newSearch() {
+    $("#new-search").on("click", function (event) {
+        $("#searchField").show();
+        $("#new-search").hide();
+    })
+}
+function initMap(centerLat, centerLong) {
+    mymap = L.map("mymap").setView([centerLat, centerLong], 13);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'sk.eyJ1IjoiZWhhYnJhc3VsIiwiYSI6ImNqdDlhZTIzczAxemc0NHBtYXJzd2hrN2oifQ.zvIfEYP1713Hn7KORi25Nw'
+    }).addTo(mymap);
+    // var marker = L.marker([centerLat, centerLong]).addTo(mymap);
+    // marker.bindPopup("<b>You are here").openPopup();
+}
+function drawPins(restaurantLatitude, restaurantLongitude) {
+    var marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
+    marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone).openPopup();
+}
+
 // function createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating, ID) {
 //     var cardDiv = $('<div class="card border-light mb-3" "width:18rem;">');
 //     var restName = $("<div class='card title' id='divRest" + ID + "'>").text(restaurantName);

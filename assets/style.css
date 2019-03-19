@@ -133,3 +133,7 @@ h1 {
     margin:5px;
     padding:10px;
 }
+
+#new-search {
+    display: none;
+}
