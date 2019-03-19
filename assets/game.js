@@ -124,7 +124,6 @@ $(".card-link").on("click", function () {
 })
 
 displayJokes();
-createMapQuery();
 
 $("#launch-search").on("click", function (event) {
     event.preventDefault();
