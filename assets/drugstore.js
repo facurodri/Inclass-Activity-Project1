@@ -16,12 +16,12 @@ $(document).ready(function () {
         $("#my-location").empty();
         // marker.clearLayers();
         // initMap(latitude, longitude);
-        var drugStore = $("#store-input").val().trim();
+        // var drugStore = $("#store-input").val().trim();
         if (needZip === "true") {
             var zipLocation = $("#location-input").val().trim();
             var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&location=44101&radius=16000&limit=10&";
         } else {
-            var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&latitude=" + latitude + "&longitude=" + longitude + "&radius=16000&limit=10&";
+            var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?categories=drugstores&open_now=true&latitude=" + latitude + "&longitude=" + longitude + "&radius=16000&limit=10&";
         }
         $.ajax({
             url: queryURL,
