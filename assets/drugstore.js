@@ -80,8 +80,13 @@ function initMap(latitude, longitude) {
         id: 'mapbox.streets',
         accessToken: 'sk.eyJ1IjoiZWhhYnJhc3VsIiwiYSI6ImNqdDlhZTIzczAxemc0NHBtYXJzd2hrN2oifQ.zvIfEYP1713Hn7KORi25Nw'
     }).addTo(mymap);
-    var marker = L.marker([latitude, longitude]).addTo(mymap);
-    marker.bindPopup("<b>You are here").openPopup();
+    var circle = L.circle([latitude, longitude], {
+        color: "red",
+        fillColor: "#f03",
+        fillOpacity: 0.5,
+        radius: 500
+    }).addTo(mymap);
+    circle.bindPopup("<b>You are here").openPopup();
 }
 function drawPins(restaurantLatitude, restaurantLongitude) {
     var marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
