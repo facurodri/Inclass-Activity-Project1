@@ -90,25 +90,23 @@
             </div>
         </form>
     </div>
-    <div class="col m6">
-            <div class="form-group">
-                <button class="btn #ff6f00 amber darken-2 waves-effect waves-light hoverable" id="new-search"
-                    type="submit">New search</button></td>
-            </div>
-        </div>
     <br>
     <br>
     <br>
     <div class="container addSearch">
-            <div class="col m12">
-                <div id="mymap"></div>
+        <div id="invalidZIPCode" class="modal">
+            <div class="modal-content">
+                <p>Please provide complete data for all fields<br>(Click to close)</p>
             </div>
         </div>
-    </div>
-    
-    <div id="invalidZIPCode" class="modal">
-        <div class="modal-content">
-            <p>Please enter a valid ZIP code<br>(Click to close)</p>
+            <div class="col m12">
+            <div id="mymap"></div>
+        </div>
+        <div class="col m6">
+            <div class="form-group">
+                <button class="btn #ff6f00 amber darken-2 waves-effect waves-light hoverable" id="new-search"
+                    type="submit">New search</button></td>
+            </div>
         </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
