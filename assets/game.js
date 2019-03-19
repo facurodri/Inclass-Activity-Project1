@@ -130,55 +130,60 @@ $("#launch-search").on("click", function (event) {
     event.preventDefault();
     var establishmentType = $("#establishment-input").val().trim();
     var zipLocation = $("#location-input").val().trim();
-    checkLength();
-    var searchMiles = $("#radius-input").val().trim();
-    var costRange = $("#cost-input").val().trim();
-    var searchRadius = searchMiles * 1600;
-    var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=10&";
-    $.ajax({
-        url: queryURL,
-        method: 'GET',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', 'Bearer 5heKVWAAeZWxG448-Dgp3LTQj5RVwmWMhtdP4RRUGfe1QYKIFGKLxilcNz-qDIjtRl6Iyw93quLT-lEbLqjY5BdoYIP-ZORTdjRS4MmhrWBJm0k7g7rfIk44g-2DXHYx');
-            xhr.setRequestHeader('Access-Control-Allow-Origin');
-        },
-    })
-        .then(function (response) {
-            console.log(response);
-            var centerLat = response.region.center.latitude;
-            var centerLong = response.region.center.longitude;
-            initMap(centerLat, centerLong);
-            $("#searchField").hide();
-            $("#new-search").show();
-            console.log("latitude: ", centerLat, "longitude: ", centerLong);
-            for (var j = 1; j < response.businesses.length; j++) {
-                var restaurantName = response.businesses[j].name;
-                var restaurantAddress = response.businesses[j].location.address1 + ", " + response.businesses[j].location.city + ", " + response.businesses[j].location.state + " " + response.businesses[j].location.zip_code;
-                var restaurantPhone = response.businesses[j].display_phone;
-                var restaurantRating = response.businesses[j].rating;
-                var ID = response.businesses[j].id;
-                var restaurantLatitude = response.businesses[j].coordinates.latitude;
-                var restaurantLongitude = response.businesses[j].coordinates.longitude;
+    if (zipLocation.length != 5 || establishmentType === "" || zipLocation === "" || searchMiles === "") {
+        invalidFormModal();
+    } else {
+        var searchMiles = $("#radius-input").val().trim();
+        var costRange = $("#cost-input").val().trim();
+        var searchRadius = searchMiles * 1600;
+        var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=10&";
+        $.ajax({
+            url: queryURL,
+            method: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer 5heKVWAAeZWxG448-Dgp3LTQj5RVwmWMhtdP4RRUGfe1QYKIFGKLxilcNz-qDIjtRl6Iyw93quLT-lEbLqjY5BdoYIP-ZORTdjRS4MmhrWBJm0k7g7rfIk44g-2DXHYx');
+                xhr.setRequestHeader('Access-Control-Allow-Origin');
+            },
+        })
+            .then(function (response) {
+                console.log(response);
+                var centerLat = response.region.center.latitude;
+                var centerLong = response.region.center.longitude;
+                initMap(centerLat, centerLong);
+                $("#searchField").hide();
+                $("#new-search").show();
+                console.log("latitude: ", centerLat, "longitude: ", centerLong);
+                for (var j = 1; j < response.businesses.length; j++) {
+                    var restaurantName = response.businesses[j].name;
+                    var restaurantAddress = response.businesses[j].location.address1 + ", " + response.businesses[j].location.city + ", " + response.businesses[j].location.state + " " + response.businesses[j].location.zip_code;
+                    var restaurantPhone = response.businesses[j].display_phone;
+                    var restaurantRating = response.businesses[j].rating;
+                    var ID = response.businesses[j].id;
+                    var restaurantLatitude = response.businesses[j].coordinates.latitude;
+                    var restaurantLongitude = response.businesses[j].coordinates.longitude;
+                    marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
+                    marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone).openPopup();
+                    console.log(restaurantName, "latitude: " + restaurantLatitude, "longitude: " + restaurantLongitude);
+                }
+                var restaurantName = response.businesses[0].name;
+                var restaurantAddress = response.businesses[0].location.address1 + ", " + response.businesses[0].location.city + ", " + response.businesses[0].location.state + " " + response.businesses[0].location.zip_code;
+                var restaurantPhone = response.businesses[0].display_phone;
+                var restaurantRating = response.businesses[0].rating;
+                var ID = response.businesses[0].id;
+                var restaurantLatitude = response.businesses[0].coordinates.latitude;
+                var restaurantLongitude = response.businesses[0].coordinates.longitude;
                 marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
-                marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone).openPopup();
-                console.log(restaurantName, "latitude: " + restaurantLatitude, "longitude: " + restaurantLongitude);
-            }
-            var restaurantName = response.businesses[0].name;
-            var restaurantAddress = response.businesses[0].location.address1 + ", " + response.businesses[0].location.city + ", " + response.businesses[0].location.state + " " + response.businesses[0].location.zip_code;
-            var restaurantPhone = response.businesses[0].display_phone;
-            var restaurantRating = response.businesses[0].rating;
-            var ID = response.businesses[0].id;
-            var restaurantLatitude = response.businesses[0].coordinates.latitude;
-            var restaurantLongitude = response.businesses[0].coordinates.longitude;
-            marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
-            marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone + "<br>Yelp rating: " + restaurantRating).openPopup();
-        });
+                marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone + "<br>Yelp rating: " + restaurantRating).openPopup();
+            });
+    }
 });
 
 function newSearch() {
     $("#new-search").on("click", function (event) {
         $("#searchField").show();
         $("#new-search").hide();
+        location.reload();
+
     })
 }
 function initMap(centerLat, centerLong) {
@@ -189,31 +194,14 @@ function initMap(centerLat, centerLong) {
         id: 'mapbox.streets',
         accessToken: 'sk.eyJ1IjoiZWhhYnJhc3VsIiwiYSI6ImNqdDlhZTIzczAxemc0NHBtYXJzd2hrN2oifQ.zvIfEYP1713Hn7KORi25Nw'
     }).addTo(mymap);
-    // var marker = L.marker([centerLat, centerLong]).addTo(mymap);
-    // marker.bindPopup("<b>You are here").openPopup();
 }
+
 function drawPins(restaurantLatitude, restaurantLongitude) {
     var marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
     marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone).openPopup();
 }
 
-// function createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating, ID) {
-//     var cardDiv = $('<div class="card border-light mb-3" "width:18rem;">');
-//     var restName = $("<div class='card title' id='divRest" + ID + "'>").text(restaurantName);
-//     var restAddress = $("<h5 class='card-text' id='divAdd" + ID + "'>").text(restaurantAddress);
-//     var restPhone = $("<div class ='card-text' id='divPhone" + ID + "'>").text(restaurantPhone);
-//     var restRating = $("<div class ='card-text' id='divRating" + ID + "'>").text(restaurantRating);
-//     var mapButton = $("<button type='button' class='mapBtn' data-name='" + ID + "'>").text("Map this");
-//     cardDiv.append(restName);
-//     cardDiv.append(restAddress);
-//     cardDiv.append(restPhone);
-//     cardDiv.append(restRating);
-//     cardDiv.append(mapButton);
-//     // cardDiv.append(ID);
-//     $("#resultsSpace").append(cardDiv);
-// }
-
-function invalidZIPModal() {
+function invalidFormModal() {
     var modal = document.getElementById('invalidZIPCode');
     modal.style.display = "block";
     modal.onclick = function () {
@@ -221,17 +209,3 @@ function invalidZIPModal() {
     }
 }
 
-function checkLength(zipLocation) {
-    var zip = $("#location-input").val().trim();
-    if (zip.length != 5) {
-        invalidZIPModal();
-    }
-}
-
-// function createMapQuery(ID) {
-//     $(".mapBtn").on("click", function () {
-//         var reply_click = document.getElementsByClassName('mapBtn').onclick;
-//         // var btnID = event.target.id
-//         // console.log(reply_click);
-//     })
-// }
