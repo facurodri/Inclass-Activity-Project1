@@ -3,12 +3,6 @@
     font-family: cursive;
     text-shadow: 2px 2px 3px rgb(144, 6, 29);
 }
-/* .banner {
-    background-image: url(../assets/images/abstract-hearts-background.jpg);
- /* background-position: center;
-  background-size: cover;
-  box-shadow: 2px 5px 8px black; 
-}*/
 .iceNav {
     background-image: url(../assets/images/BlueGradient2.jpg);
     background-size: cover;
@@ -26,7 +20,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     height: auto;
-    /* width: 100%;  */
+    
 }
 .search-button {
     margin: 0 0 20px 0;
@@ -37,15 +31,23 @@ label {
     color:rgb(255, 255, 255);
     text-shadow: 1px 2px 2px black;
 }
+.labelModal{
+    font-size: 100%;
+    color:black;
+}
 button {
     float: left;
     margin: 4px; 
     text-shadow: 1px 2px 2px rgb(121, 8, 8);
 }
-input {
+.form-control modal1{
+    color:red;
+    text-shadow: 1px 2px 2px rgb(121, 8, 8); 
+}
+/* input {
   color:white;
   text-shadow: 1px 2px 2px rgb(121, 8, 8); 
-}
+} */
 #mymap {
     height: 400px;
 }
@@ -60,6 +62,11 @@ h1 {
     line-height: 75%;
     margin: .8rem 0 1.68rem 0;
 }
+
+/* css for forms */
+/* .formRest, .formDrug, .formLogin, .formModalLogin {
+
+} */
 
 .border-light{
     background-color: #fff;
@@ -87,23 +94,19 @@ h1 {
 #resultsSpace {
     float: left;
 }
-/* .form-group {
+.form-group {
     color:#fff;
-    text-shadow: 2px 2px 2px rgb(29, 0, 0); */
+    text-shadow: 2px 2px 2px rgb(29, 0, 0);
+ }
+ .form-control {
+     color:#fff;
+    text-shadow: 2px 2px 2px rgb(29, 0, 0);
+ }
+/* .modal {
+    color: black; 
     
-/* } */
-.modal {
-    display: none; 
-    position: relative; 
-    z-index: 1; 
-    margin: auto;
-    left: 25;
-    top: 25; 
-    width: 45%; 
-    height: 25%; 
-    background-color: royalblue;
-}
-.modal-content {
+} */
+/* .modal-content {
     margin: 0; 
     padding: 20px;
     font-size: 11pt;
@@ -123,7 +126,7 @@ h1 {
     color: black;
     text-decoration: none;
     cursor: pointer;
-  }
+  } */
 
 .navbarMain {
     background-image: url(../assets/images/gradientPic.jpg);

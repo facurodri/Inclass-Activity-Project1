@@ -1,5 +1,6 @@
 //Gets materialize ready to use when page loads
 $(document).ready(function () {
+    $(".modal").modal();
     $(".sidenav").sidenav();
     $("select").formSelect();
 });
