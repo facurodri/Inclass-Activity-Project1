@@ -36,8 +36,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 $("#sign-up").on("click", function () {
 
     // Grab values from text-boxes
-    const firstName = $("#first-name").val().trim();
-    const lastName = $("#last-name").val().trim();
+    var userName = $("#user-name").val().trim();
     const email = $("#signup-email").val().trim();
     const pass = $("#signup-pass").val().trim();
     //console.log(email, pass)
@@ -49,8 +48,8 @@ $("#sign-up").on("click", function () {
         //var errorMessage = error.message;
 
         // Clears the text-boxes
-        $("#first-name").val("");
-        $("#last-name").val("");
+         
+        $("#user-name").val("");
         $("#signup-email").val("");
         $("#signup-pass").val("");
     })
@@ -95,9 +94,9 @@ function displayJokes() {
     var queryURL = "https://official-joke-api.appspot.com/random_ten";
 
     $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
+            url: queryURL,
+            method: "GET"
+        })
         .then(function (response) {
             // console.log(response);
             resultsJoke = response;
