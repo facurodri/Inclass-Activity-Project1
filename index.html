@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home Page</title>
-
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
     <link rel="stylesheet" type="text/css" href="assets/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
@@ -16,7 +17,6 @@
     <div class="jumbotron banner text-center">
         <h1 class="display-1">First Date App!</h1>
     </div>
-
     <div class="container jokeArea py-3">
         <div class="row">
             <div class="col-md-12">
@@ -25,8 +25,8 @@
                     <h4><span id="jokeQ"></span></h4>
                     <h6><span id="jokeGen"></span></h6>
                     <a href="#" class="card-link"> Next Joke</a>
-                    <a href="#collapse" role="button" data-toggle="jokeArea" aria-expanded="false"
-                        aria-controls="collapseExample"> Hide</a>
+                    <a href="#collapse" role="button" data-toggle="jokeArea" aria-expanded="false" aria-controls="collapseExample">
+                        Hide</a>
                 </div>
             </div>
         </div>
@@ -37,12 +37,12 @@
                 <form>
                     <div class="form-group">
                         <label for="establishmentType"><strong>Type of Establishment</strong></label>
-                        <input type="text" class="form-control" id="establishment-input"
-                            placeholder="Italian, Coffee, Ice Cream, etc.">
+                        <input type="text" class="form-control" id="establishment-input" placeholder="Italian, Coffee, Ice Cream, etc.">
                     </div>
                     <div class="form-group">
                         <label for="location"><strong>ZIP Code</strong></label>
-                        <input type="text" class="form-control" id="location-input" maxlength="5" minlength="5" placeholder="00000" pattern="[0-9]{5}"> 
+                        <input type="text" class="form-control" id="location-input" maxlength="5" minlength="5"
+                            placeholder="00000" pattern="[0-9]{5}">
                     </div>
                     <div class="form-group">
                         <label for="radius"><strong>Radius (between 1 and 25 miles)</strong></label>
@@ -65,15 +65,15 @@
                         <p>Please enter a valid ZIP code<br>(Click to close)</p>
                     </div>
                 </div>
-
             </div>
-
             <div class="col-md-6">
                 <div id="resultsSpace"></div>
             </div>
         </div>
     </div>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="../Inclass-Activity-Project1/assets/game.js"></script>
-    </body>
-    </html>
+</body>
+
+</html>

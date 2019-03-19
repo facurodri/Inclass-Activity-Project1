@@ -6,72 +6,153 @@ var config = {
     projectId: "first-project-9f391",
     storageBucket: "first-project-9f391.appspot.com",
     messagingSenderId: "290744685174"
- };
- firebase.initializeApp(config);
- 
- //get data
- firebase.firestore().collection("first-project").get().then(snapshot => {
-   console.log(snapshot.docs)
- });
- 
- 
- //keeping track of user authentification status
- firebase.auth().onAuthStateChanged(function (user) {
+};
+
+firebase.initializeApp(config);
+
+
+//LOG OUT FUNCTION
+$("#log-out").on("click", function () {
+    firebase.auth().signOut();
+    window.location.href = "loginPage.html";
+});
+
+//LOG IN FUNCTION
+$("#log-in").on("click", function () {
+    event.preventDefault();
+    //get user 
+   
+    const email = $("#login-email").val().trim();
+    const pass = $("#login-pass").val().trim();
+    
+
+    firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
+    
+        //SEND TO MAIN PAGE 
+        window.location.href = "index.html";
+
+        $("#login-email").val("");
+        $("#login-pass").val("");
+
+    })
+})
+//ANONYMOUS SIGN IN
+
+$("#skip").on("click", function () {
+    window.location.href = "index.html";
+
+});
+
+//keeping track of user authentification status
+firebase.auth().onAuthStateChanged(function (user) {
+    console.log(user)
+    var user = firebase.auth().currentUser;
+
     if (user) {
-        // User is signed in.
-        console.log("user logged in: " + user)
-    } else {
+        console.log("user logged in");
+    } 
+    else {
         console.log("user logged out");
     }
- });
- 
- //SIGN UP FUNCTION
- $("#sign-up").on("click", function () {
-    
+});
+//TESTIMONIALS SECTION
+var modal = document.getElementById('myModalSuccess');
+
+function uploadSuccess() {
+    modal.style.display = "block";
+};
+
+$("#add-comment").on("click", function (event) {
+    event.preventDefault();
+
+    uploadSuccess();
+    //button for closing modal 
+    $(".closeBtn").on("click", function () {
+        modal.style.display = "none";
+
+    });
+});
+
+var database = firebase.database();
+var name = "";
+var comment = "";
+var userName = "";
+
+
+//SIGN UP FUNCTION
+$("#sign-up").on("click", function () {
+
     // Grab values from text-boxes
-    const firstName = $("#first-name").val().trim();
-    const lastName = $("#last-name").val().trim();
+    var userName = $("#user-name").val().trim();
     const email = $("#signup-email").val().trim();
     const pass = $("#signup-pass").val().trim();
-    //console.log(email, pass)
- 
+
+    database.ref().push({
+        userName: userName,
+        email: email
+    })
+   
+    console.log(userName)
     firebase.auth().createUserWithEmailAndPassword(email, pass).then(cred => {
-        // console.log(cred.user)
-        //handle errors
-        //var errorCode = error.code;
-        //var errorMessage = error.message;
- 
+        
         // Clears the text-boxes
-        $("#first-name").val("");
-        $("#last-name").val("");
+         
+        $("#user-name").val("");
         $("#signup-email").val("");
         $("#signup-pass").val("");
     })
- })
- 
- //LOG OUT FUNCTION
- $("#log-out").on("click", function () {
+})
+
+//button for submitting comment 
+$("#submit").on("click", function (name, comment) {
+
+    //grab user input 
+    var name = $("#name-input").val().trim();
+    var comment = $("#comment-input").val().trim();
     
-    firebase.auth().signOut();
- });
- 
- 
- //LOG IN FUNCTION
- $("#log-in").on("click", function () {
-    
-    //get user info
-    const email = $("#login-email").val().trim();
-    const pass = $("#login-pass").val().trim();
- 
-    firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
-        console.log(cred.user)
-        //SEND TO MAIN PAGE 
-        window.location.href = "index.html";
- 
-        $("#login-email").val("");
-        $("#login-pass").val("");
+
+    // Creates local "temporary" object for holding data 
+    var userData = {
+        name: name,
+        comment: comment,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
+    };
+
+    // Uploads user data to the database
+    database.ref().push(userData);
+    // Logs everything to console
+    console.log(userData.userName);
+    console.log(userData.comment);
+
+    //create a new div 
+    var a = $("<div>");
+    var newComment = $("<p>").text(comment);
+    newComment.addClass("card-body");
+    a.addClass("card");
+    var newName = $("<footer>").text(name);
+    newName.addClass("blockquote-footer");
+
+    //append new name and comment to the new div 
+    a.append(newComment);
+    a.append(newName);
+
+    $(".comment-div").append(a);
+
+    //clear text boxes 
+    $("#name-input").val("");
+    $("#comment-input").val("");
+})
+
+// Create Firebase event for adding comment to the database and a div in the html when a user adds an entry
+
+    database.ref().on("child_added", function (childSnapshot) {
+        // storing the snapshot.val() in a variable 
+        var sv = childSnapshot.val();
+        const name = sv.newName;
+        const comment = sv.newComment;
+
     })
- })
+
 // variables
 var establishmentType = "";
 var zipLocation = "";
@@ -85,11 +166,11 @@ function displayJokes() {
     var queryURL = "https://official-joke-api.appspot.com/random_ten";
 
     $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
+            url: queryURL,
+            method: "GET"
+        })
         .then(function (response) {
-            console.log(response);
+            //console.log(response);
             var results = response;
             // cycle through each of the elements of the results array
             for (i = 0; i < results.length; i++) {
@@ -126,13 +207,13 @@ $("#launch-search").on("click", function (event) {
     // var queryURL = "https://api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=5&";
     // var queryURL = "https://api.yelp.com/v3/businesses/search?"
     $.ajax({
-        url: queryURL,
-        method: 'GET',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', 'Bearer 5heKVWAAeZWxG448-Dgp3LTQj5RVwmWMhtdP4RRUGfe1QYKIFGKLxilcNz-qDIjtRl6Iyw93quLT-lEbLqjY5BdoYIP-ZORTdjRS4MmhrWBJm0k7g7rfIk44g-2DXHYx');
-            xhr.setRequestHeader('Access-Control-Allow-Origin');
-        },
-    })
+            url: queryURL,
+            method: 'GET',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer 5heKVWAAeZWxG448-Dgp3LTQj5RVwmWMhtdP4RRUGfe1QYKIFGKLxilcNz-qDIjtRl6Iyw93quLT-lEbLqjY5BdoYIP-ZORTdjRS4MmhrWBJm0k7g7rfIk44g-2DXHYx');
+                xhr.setRequestHeader('Access-Control-Allow-Origin');
+            },
+        })
         .then(function (response) {
             console.log(response);
             for (var j = 0; j < 10; j++) {
@@ -157,13 +238,13 @@ $("#launch-search").on("click", function (event) {
 function createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating, ID) {
 
     var cardDiv = $('<div class="card border-light mb-3" "width:18rem;">');
-    var restName = $("<div class='card title' id='divRest" + ID  +"'>").text(restaurantName);
-    var restAddress = $("<h5 class='card-text' id='divAdd" + ID  +"'>").text(restaurantAddress);
-    var restPhone = $("<div class ='card-text' id='divPhone" + ID  +"'>").text(restaurantPhone);
-    var restRating = $("<div class ='card-text' id='divRating" + ID  +"'>").text(restaurantRating);
+    var restName = $("<div class='card title' id='divRest" + ID + "'>").text(restaurantName);
+    var restAddress = $("<h5 class='card-text' id='divAdd" + ID + "'>").text(restaurantAddress);
+    var restPhone = $("<div class ='card-text' id='divPhone" + ID + "'>").text(restaurantPhone);
+    var restRating = $("<div class ='card-text' id='divRating" + ID + "'>").text(restaurantRating);
     var mapButton = $("<button type='button' class='mapBtn' data-name='" + ID + "'>").text("Map this");
 
-    
+
     cardDiv.append(restName);
     cardDiv.append(restAddress);
     cardDiv.append(restPhone);
@@ -190,16 +271,15 @@ function checkLength(zipLocation) {
 }
 
 
-    function createMapQuery() {
-        $(".mapBtn").on("click", function () {
-            ID
-            mapAddress = $("#divAdd" + ID).text();
-            console.log(mapAddress);
-        })
+function createMapQuery() {
+    $(".mapBtn").on("click", function () {
+        ID
+        mapAddress = $("#divAdd" + ID).text();
+        console.log(mapAddress);
+    })
 
 
-    }
-
+}
 
 // function mapThis() {
 //     $.ajax({
