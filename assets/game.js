@@ -1,3 +1,10 @@
+//Gets materialize ready to use when page loads
+$(document).ready(function () {
+    $(".modal").modal();
+    $(".sidenav").sidenav();
+    $("select").formSelect();
+});
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyDNAzAPsRxEWr0BTKS1vapd364ySRuCe-0",
@@ -7,77 +14,23 @@ var config = {
     storageBucket: "first-project-9f391.appspot.com",
     messagingSenderId: "290744685174"
 };
-
 firebase.initializeApp(config);
 
-
-//LOG OUT FUNCTION
-$("#log-out").on("click", function () {
-    firebase.auth().signOut();
-    window.location.href = "loginPage.html";
+//get data
+firebase.firestore().collection("first-project").get().then(snapshot => {
+    //    console.log(snapshot.docs)
 });
 
-//LOG IN FUNCTION
-$("#log-in").on("click", function () {
-    event.preventDefault();
-    //get user 
-   
-    const email = $("#login-email").val().trim();
-    const pass = $("#login-pass").val().trim();
-    
-
-    firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
-    
-        //SEND TO MAIN PAGE 
-        window.location.href = "index.html";
-
-        $("#login-email").val("");
-        $("#login-pass").val("");
-
-    })
-})
-//ANONYMOUS SIGN IN
-
-$("#skip").on("click", function () {
-    window.location.href = "index.html";
-
-});
 
 //keeping track of user authentification status
 firebase.auth().onAuthStateChanged(function (user) {
-    console.log(user)
-    var user = firebase.auth().currentUser;
-
     if (user) {
-        console.log("user logged in");
-    } 
-    else {
-        console.log("user logged out");
+        // User is signed in.
+        // console.log("user logged in: " + user)
+    } else {
+        // console.log("user logged out");
     }
 });
-//TESTIMONIALS SECTION
-var modal = document.getElementById('myModalSuccess');
-
-function uploadSuccess() {
-    modal.style.display = "block";
-};
-
-$("#add-comment").on("click", function (event) {
-    event.preventDefault();
-
-    uploadSuccess();
-    //button for closing modal 
-    $(".closeBtn").on("click", function () {
-        modal.style.display = "none";
-
-    });
-});
-
-var database = firebase.database();
-var name = "";
-var comment = "";
-var userName = "";
-
 
 //SIGN UP FUNCTION
 $("#sign-up").on("click", function () {
@@ -86,15 +39,14 @@ $("#sign-up").on("click", function () {
     var userName = $("#user-name").val().trim();
     const email = $("#signup-email").val().trim();
     const pass = $("#signup-pass").val().trim();
+    //console.log(email, pass)
 
-    database.ref().push({
-        userName: userName,
-        email: email
-    })
-   
-    console.log(userName)
     firebase.auth().createUserWithEmailAndPassword(email, pass).then(cred => {
-        
+        // console.log(cred.user)
+        //handle errors
+        //var errorCode = error.code;
+        //var errorMessage = error.message;
+
         // Clears the text-boxes
          
         $("#user-name").val("");
@@ -103,55 +55,30 @@ $("#sign-up").on("click", function () {
     })
 })
 
-//button for submitting comment 
-$("#submit").on("click", function (name, comment) {
+//LOG OUT FUNCTION
+$("#log-out").on("click", function () {
 
-    //grab user input 
-    var name = $("#name-input").val().trim();
-    var comment = $("#comment-input").val().trim();
-    
+    firebase.auth().signOut();
+});
 
-    // Creates local "temporary" object for holding data 
-    var userData = {
-        name: name,
-        comment: comment,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
-    };
 
-    // Uploads user data to the database
-    database.ref().push(userData);
-    // Logs everything to console
-    console.log(userData.userName);
-    console.log(userData.comment);
+//LOG IN FUNCTION
+$("#log-in").on("click", function () {
 
-    //create a new div 
-    var a = $("<div>");
-    var newComment = $("<p>").text(comment);
-    newComment.addClass("card-body");
-    a.addClass("card");
-    var newName = $("<footer>").text(name);
-    newName.addClass("blockquote-footer");
+    //get user info
+    const email = $("#login-email").val().trim();
+    const pass = $("#login-pass").val().trim();
 
-    //append new name and comment to the new div 
-    a.append(newComment);
-    a.append(newName);
+    firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
+        // console.log(cred.user)
+        //SEND TO MAIN PAGE 
+        window.location.href = "index.html";
 
-    $(".comment-div").append(a);
-
-    //clear text boxes 
-    $("#name-input").val("");
-    $("#comment-input").val("");
-})
-
-// Create Firebase event for adding comment to the database and a div in the html when a user adds an entry
-
-    database.ref().on("child_added", function (childSnapshot) {
-        // storing the snapshot.val() in a variable 
-        var sv = childSnapshot.val();
-        const name = sv.newName;
-        const comment = sv.newComment;
-
+        $("#login-email").val("");
+        $("#login-pass").val("");
     })
+});
+
 
 // variables
 var establishmentType = "";
@@ -161,6 +88,7 @@ var costRange = "";
 var jokeQ = "";
 var punchLine = "";
 var mapAddress = "";
+var resultsJoke = [];
 
 function displayJokes() {
     var queryURL = "https://official-joke-api.appspot.com/random_ten";
@@ -170,13 +98,23 @@ function displayJokes() {
             method: "GET"
         })
         .then(function (response) {
-            //console.log(response);
-            var results = response;
+            // console.log(response);
+            resultsJoke = response;
             // cycle through each of the elements of the results array
-            for (i = 0; i < results.length; i++) {
+            for (i = 0; i < resultsJoke.length; i++) {
 
-                jokeQ = $("#jokeQ").text(results[i].setup);
-                punchLine = $("#jokeGen").text(results[i].punchline);
+                var jokeDiv = $("<div class='card center'>");
+                jokeDiv.addClass("jokes col l4 m6 s12")
+                jokeDiv.append("<div ='card-content'>");
+                jokeQ = resultsJoke[i].setup;
+                var jQ = $("<p>").text(jokeQ);
+                jokeDiv.append(jQ);
+
+                punchLine = resultsJoke[i].punchline;
+                var pL = $("<p>").text(punchLine);
+                jokeDiv.append(pL);
+
+                $(".jokesContainer").append(jokeDiv);
 
             }
         });
@@ -186,27 +124,20 @@ $(".card-link").on("click", function () {
 })
 
 displayJokes();
-createMapQuery();
+newSearch();
 
 $("#launch-search").on("click", function (event) {
     event.preventDefault();
-    $("#resultsSpace").empty();
     var establishmentType = $("#establishment-input").val().trim();
-    console.log(establishmentType);
     var zipLocation = $("#location-input").val().trim();
-    checkLength();
-    console.log(zipLocation);
-    var searchMiles = $("#radius-input").val().trim();
-    console.log(searchMiles);
-    var costRange = $("#cost-input").val().trim();
-    console.log(costRange);
-    var searchRadius = searchMiles * 1600;
-    console.log(searchRadius);
-    var queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=10&";
-    // var queryURL = "https://api.yelp.com/v3/businesses/search?location=cleveland";
-    // var queryURL = "https://api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=5&";
-    // var queryURL = "https://api.yelp.com/v3/businesses/search?"
-    $.ajax({
+    if (zipLocation.length != 5 || establishmentType === "" || zipLocation === "" || searchMiles === "") {
+        invalidFormModal();
+    } else {
+        var searchMiles = $("#radius-input").val().trim();
+        var costRange = $("#cost-input").val().trim();
+        var searchRadius = searchMiles * 1600;
+        var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=10&";
+        $.ajax({
             url: queryURL,
             method: 'GET',
             beforeSend: function (xhr) {
@@ -214,48 +145,63 @@ $("#launch-search").on("click", function (event) {
                 xhr.setRequestHeader('Access-Control-Allow-Origin');
             },
         })
-        .then(function (response) {
-            console.log(response);
-            for (var j = 0; j < 10; j++) {
-                var restaurantName = response.businesses[j].name;
-                console.log(restaurantName);
-                var restaurantAddress = response.businesses[j].location.address1 + ", " + response.businesses[j].location.city + ", " + response.businesses[j].location.state + " " + response.businesses[j].location.zip_code;
-                console.log(restaurantAddress);
-                var restaurantPhone = response.businesses[j].display_phone;
-                console.log(restaurantPhone);
-                var restaurantRating = response.businesses[j].rating;
-                console.log("Rating: " + restaurantRating);
-                var ID = response.businesses[j].id;
-                console.log("ID = " + ID);
-                createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating, ID);
-            };
-
-        })
-
+            .then(function (response) {
+                console.log(response);
+                var centerLat = response.region.center.latitude;
+                var centerLong = response.region.center.longitude;
+                initMap(centerLat, centerLong);
+                $("#searchField").hide();
+                $("#new-search").show();
+                console.log("latitude: ", centerLat, "longitude: ", centerLong);
+                for (var j = 1; j < response.businesses.length; j++) {
+                    var restaurantName = response.businesses[j].name;
+                    var restaurantAddress = response.businesses[j].location.address1 + ", " + response.businesses[j].location.city + ", " + response.businesses[j].location.state + " " + response.businesses[j].location.zip_code;
+                    var restaurantPhone = response.businesses[j].display_phone;
+                    var restaurantRating = response.businesses[j].rating;
+                    var ID = response.businesses[j].id;
+                    var restaurantLatitude = response.businesses[j].coordinates.latitude;
+                    var restaurantLongitude = response.businesses[j].coordinates.longitude;
+                    marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
+                    marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone).openPopup();
+                    console.log(restaurantName, "latitude: " + restaurantLatitude, "longitude: " + restaurantLongitude);
+                }
+                var restaurantName = response.businesses[0].name;
+                var restaurantAddress = response.businesses[0].location.address1 + ", " + response.businesses[0].location.city + ", " + response.businesses[0].location.state + " " + response.businesses[0].location.zip_code;
+                var restaurantPhone = response.businesses[0].display_phone;
+                var restaurantRating = response.businesses[0].rating;
+                var ID = response.businesses[0].id;
+                var restaurantLatitude = response.businesses[0].coordinates.latitude;
+                var restaurantLongitude = response.businesses[0].coordinates.longitude;
+                marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
+                marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone + "<br>Yelp rating: " + restaurantRating).openPopup();
+            });
+    }
 });
 
+function newSearch() {
+    $("#new-search").on("click", function (event) {
+        $("#searchField").show();
+        $("#new-search").hide();
+        location.reload();
 
-function createSearchCard(restaurantName, restaurantAddress, restaurantPhone, restaurantRating, ID) {
-
-    var cardDiv = $('<div class="card border-light mb-3" "width:18rem;">');
-    var restName = $("<div class='card title' id='divRest" + ID + "'>").text(restaurantName);
-    var restAddress = $("<h5 class='card-text' id='divAdd" + ID + "'>").text(restaurantAddress);
-    var restPhone = $("<div class ='card-text' id='divPhone" + ID + "'>").text(restaurantPhone);
-    var restRating = $("<div class ='card-text' id='divRating" + ID + "'>").text(restaurantRating);
-    var mapButton = $("<button type='button' class='mapBtn' data-name='" + ID + "'>").text("Map this");
-
-
-    cardDiv.append(restName);
-    cardDiv.append(restAddress);
-    cardDiv.append(restPhone);
-    cardDiv.append(restRating);
-    cardDiv.append(mapButton);
-    // cardDiv.append(ID);
-    $("#resultsSpace").append(cardDiv);
-
+    })
+}
+function initMap(centerLat, centerLong) {
+    mymap = L.map("mymap").setView([centerLat, centerLong], 13);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'sk.eyJ1IjoiZWhhYnJhc3VsIiwiYSI6ImNqdDlhZTIzczAxemc0NHBtYXJzd2hrN2oifQ.zvIfEYP1713Hn7KORi25Nw'
+    }).addTo(mymap);
 }
 
-function invalidZIPModal() {
+function drawPins(restaurantLatitude, restaurantLongitude) {
+    var marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
+    marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone).openPopup();
+}
+
+function invalidFormModal() {
     var modal = document.getElementById('invalidZIPCode');
     modal.style.display = "block";
     modal.onclick = function () {
@@ -263,37 +209,3 @@ function invalidZIPModal() {
     }
 }
 
-function checkLength(zipLocation) {
-    var zip = $("#location-input").val().trim();
-    if (zip.length != 5) {
-        invalidZIPModal();
-    }
-}
-
-
-function createMapQuery() {
-    $(".mapBtn").on("click", function () {
-        ID
-        mapAddress = $("#divAdd" + ID).text();
-        console.log(mapAddress);
-    })
-
-
-}
-
-// function mapThis() {
-//     $.ajax({
-//         url: mapQueryURL,
-//         method: "GET"
-//     })
-//         .then(function (response) {
-//             console.log(response);
-//             var results = response;
-//             // cycle through each of the elements of the results array
-//             for (i = 0; i < results.length; i++) {
-
-//             }
-//         });
-// }
-
-// http://www.mapquestapi.com/geocoding/v1/address?key=xFxVU4pZGhIu50jG3PO7DQiBnQiPSWcG&location=

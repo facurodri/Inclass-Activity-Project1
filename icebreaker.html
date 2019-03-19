@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Css style Sheet-->
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+
+    <title>IceBreakers</title>
+
+</head>
+
+<!-- Dropdown Structure -->
+<nav class="nav-wrapper navbarMain">
+    <a href="#" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
+    <a href="#" class="sidenav-trigger right" data-target="mobileLinks">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul class="left hide-on-med-and-down">
+        <li><a href="#!">Account Name Here</a></li>
+    </ul>
+    <ul id="dropdown1" class="right hide-on-med-and-down">
+        <li><a href="index.html">Restaurant Search</a></li>
+        <li class="divider"></li>
+        <li><a href="icebreaker.html">Break the Ice</a></li>
+        <li class="divider"></li>
+        <li><a href="#!">Rate Date</a></li>
+        <li class="divider"></li>
+        <li><a href="drugstore.html">Drugstore</a></li>
+        <li class="divider"></li>
+        <li><a href="loginPage.html">Login</a></li>
+    </ul>
+</nav>
+<ul class="sidenav" id="mobileLinks">
+    <li><a href="index.html">Restaurant Search</a></li>
+    <li class="divider"></li>
+    <li><a href="icebreaker.html">Break the Ice</a></li>
+    <li class="divider"></li>
+    <li><a href="#!">Rate Date</a></li>
+    <li class="divider"></li>
+    <li><a href="drugstore.html">Drugstore</a></li>
+    <li class="divider"></li>
+</ul>
+<header>
+        <div class ="container"></div>
+                <a href="#terms" class="btn orange">Sign up</a>
+                
+                <div class = "modal" id="terms">
+                    test
+                </div>
+</header>
+<body class="iceBreakerBody">
+<div class="text center">
+        <h1 class="display-1">Ice Breakers!</h1>
+    </div>
+       <div class ="container">
+        <div class = "jokesContainer"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
+    <!----->
+    <script src="assets/game.js"></script>
+</body>
+
+</html>
