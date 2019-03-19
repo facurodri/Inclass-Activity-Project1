@@ -62,7 +62,9 @@ h1 {
     line-height: 75%;
     margin: .8rem 0 1.68rem 0;
 }
-
+.formRest {
+    color: white;
+}
 /* css for forms */
 /* .formRest, .formDrug, .formLogin, .formModalLogin {
 
