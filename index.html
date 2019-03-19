@@ -11,34 +11,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- Css style Sheet-->
     <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <!-- Required map style Sheet-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin="">
+
     <title>Home Page</title>
 
 </head>
 <!-- Dropdown Structure -->
-<nav class ="nav-wrapper navbarMain">
-        <a href ="#" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
-        <a href ="#" class="sidenav-trigger right" data-target="mobileLinks">
-            <i class ="material-icons">menu</i>
-        </a>
-        <ul class="left hide-on-med-and-down">
-                <li><a href="#!">Account Name Here</a></li>
-         </ul>
-        <ul id="dropdown1" class="right hide-on-med-and-down">
-                <li><a href="index.html">Restaurant Search</a></li>
-                <li class="divider"></li>
-                <li><a href="icebreaker.html">Break the Ice</a></li>
-                <li class="divider"></li>
-                <li><a href="#!">Rate Date</a></li>
-                <li class="divider"></li>
-                <li><a href="drugstore.html">Drugstore</a></li>
-                <li class="divider"></li>
-                <li><a href="loginPage.html">Login</a></li>
-            </ul>
-        </nav>
-<ul class ="sidenav" id="mobileLinks">
+<nav class="nav-wrapper navbarMain">
+    <a href="#" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
+    <a href="#" class="sidenav-trigger right" data-target="mobileLinks">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul class="left hide-on-med-and-down">
+        <li><a href="#!">Account Name Here</a></li>
+    </ul>
+    <ul id="dropdown1" class="right hide-on-med-and-down">
         <li><a href="index.html">Restaurant Search</a></li>
         <li class="divider"></li>
         <li><a href="icebreaker.html">Break the Ice</a></li>
@@ -47,57 +39,80 @@
         <li class="divider"></li>
         <li><a href="drugstore.html">Drugstore</a></li>
         <li class="divider"></li>
+        <li><a href="loginPage.html">Login</a></li>
+    </ul>
+</nav>
+<ul class="sidenav" id="mobileLinks">
+    <li><a href="index.html">Restaurant Search</a></li>
+    <li class="divider"></li>
+    <li><a href="icebreaker.html">Break the Ice</a></li>
+    <li class="divider"></li>
+    <li><a href="#!">Rate Date</a></li>
+    <li class="divider"></li>
+    <li><a href="drugstore.html">Drugstore</a></li>
+    <li class="divider"></li>
 </ul>
+
 <body class="mainBody">
     <div class="text center">
         <h1 class="display-1">Search The Night Away</h1>
     </div>
-    <div class="container py-3">
-        <div class="row">
-            <div class="col-md-6 col-sm-4">
-                <form>
-                    <div class="form-group">
-                        <label for="establishmentType"><strong>Type of Establishment</strong></label>
-                        <input type="text" class="form-control" id="establishment-input"
-                            placeholder="Italian, Coffee, Ice Cream, etc.">
-                    </div>
-                    <div class="form-group">
-                        <label for="location"><strong>ZIP Code</strong></label>
-                        <input type="text" class="form-control" id="location-input" maxlength="5" minlength="5"
-                            placeholder="00000" pattern="[0-9]{5}">
-                    </div>
-                    <div class="form-group">
-                        <label for="radius"><strong>Radius (between 1 and 25 miles)</strong></label>
-                        <input type="number" class="form-control" id="radius-input" value="10" max="25" min="1">
-                    </div>
-                    <div class="input-field col s12">
-                        <label>$ $$ $$$</label>
-                        <select id="cost-input" type="text">
-                            <option value="" disabled selected>Choose your cost range</option>
-                            <option value="1">$</option>
-                            <option value="2">$$</option>
-                            <option value="3">$$$</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn #ff6f00 amber darken-2 waves-effect waves-light hoverable" id="launch-search" type="submit">Submit</button></td>
-                    </div>
-                </form>
-                <div id="invalidZIPCode" class="modal">
-                    <div class="modal-content">
-                        <p>Please enter a valid ZIP code<br>(Click to close)</p>
-                    </div>
+    <div class="container addSearch">
+        <div class="col-lg-12 table-header"></div>
+        <form>
+            <div class="form-group">
+                <label for="establishmentType"><strong>Type of Establishment</strong></label>
+                <input type="text" class="form-control" id="establishment-input"
+                    placeholder="Italian, Coffee, Ice Cream, etc.">
+            </div>
+            <div class="form-group">
+                <label for="location"><strong>ZIP Code</strong></label>
+                <input type="text" class="form-control" id="location-input" maxlength="5" minlength="5"
+                    placeholder="00000" pattern="[0-9]{5}">
+            </div>
+            <div class="input-field">
+                <label for="costRange"><strong>$ $$ $$$</strong></label>
+                <select type="text" class="form-control" id="cost-input">
+                    <option value="1">$</option>
+                    <option value="2">$$</option>
+                    <option value="3">$$$</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="radius"><strong>Radius (between 1 and 25 miles)</strong></label>
+                <input type="number" class="form-control" id="radius-input" value="10" max="25" min="1">
+            </div>
+            <div class="col m6">
+                <div class="form-group">
+                    <button class="btn #ff6f00 amber darken-2 waves-effect waves-light hoverable" id="launch-search"
+                        type="submit">Submit</button></td>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div id="resultsSpace"></div>
+        </form>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="container addSearch">
+            <div class="col m12">
+                <div id="mymap"></div>
             </div>
+        </div>
+    </div>
+    
+    <div id="invalidZIPCode" class="modal">
+        <div class="modal-content">
+            <p>Please enter a valid ZIP code<br>(Click to close)</p>
         </div>
     </div>
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
-    <!----->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="assets/game.js"></script>
 </body>
 

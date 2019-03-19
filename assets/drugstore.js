@@ -19,7 +19,7 @@ $(document).ready(function () {
         var drugStore = $("#store-input").val().trim();
         if (needZip === "true") {
             var zipLocation = $("#location-input").val().trim();
-            var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&location=" + zipLocation + "&radius=16000&limit=10&";
+            var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&location=44101&radius=16000&limit=10&";
         } else {
             var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&latitude=" + latitude + "&longitude=" + longitude + "&radius=16000&limit=10&";
         }
@@ -32,6 +32,11 @@ $(document).ready(function () {
             },
         })
             .then(function (response) {
+                console.log(response);
+                var centerLat = response.region.center.latitude;
+                var centerLong = response.region.center.longitude;
+                // var myMap = initMap(centerLat, centerLong);
+                console.log("latitude: ", centerLat, "longitude: ", centerLong);
                 for (var j = 1; j < response.businesses.length; j++) {
                     var restaurantName = response.businesses[j].name;
                     var restaurantAddress = response.businesses[j].location.address1 + ", " + response.businesses[j].location.city + ", " + response.businesses[j].location.state + " " + response.businesses[j].location.zip_code;
