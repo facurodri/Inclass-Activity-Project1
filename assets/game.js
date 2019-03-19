@@ -14,23 +14,76 @@ var config = {
     storageBucket: "first-project-9f391.appspot.com",
     messagingSenderId: "290744685174"
 };
+
 firebase.initializeApp(config);
 
-//get data
-firebase.firestore().collection("first-project").get().then(snapshot => {
-    //    console.log(snapshot.docs)
+
+//LOG OUT FUNCTION
+$("#log-out").on("click", function () {
+    firebase.auth().signOut();
+    window.location.href = "loginPage.html";
 });
 
+//LOG IN FUNCTION
+$("#log-in").on("click", function () {
+    event.preventDefault();
+    //get user 
+   
+    const email = $("#login-email").val().trim();
+    const pass = $("#login-pass").val().trim();
+    
+
+    firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
+    
+        //SEND TO MAIN PAGE 
+        window.location.href = "index.html";
+
+        $("#login-email").val("");
+        $("#login-pass").val("");
+
+    })
+//ANONYMOUS SIGN IN
+
+$("#skip").on("click", function () {
+    window.location.href = "index.html";
+
+});
 
 //keeping track of user authentification status
 firebase.auth().onAuthStateChanged(function (user) {
+    console.log(user)
+    var user = firebase.auth().currentUser;
+
     if (user) {
-        // User is signed in.
-        // console.log("user logged in: " + user)
-    } else {
-        // console.log("user logged out");
+        console.log("user logged in");
+    } 
+    else {
+        console.log("user logged out");
     }
 });
+//TESTIMONIALS SECTION
+var modal = document.getElementById('myModalSuccess');
+
+function uploadSuccess() {
+    modal.style.display = "block";
+};
+
+$("#add-comment").on("click", function (event) {
+    event.preventDefault();
+
+    uploadSuccess();
+    //button for closing modal 
+    $(".closeBtn").on("click", function () {
+        modal.style.display = "none";
+
+    });
+});
+
+var database = firebase.database();
+var name = "";
+var comment = "";
+var userName = "";
+
 
 //SIGN UP FUNCTION
 $("#sign-up").on("click", function () {
@@ -39,14 +92,15 @@ $("#sign-up").on("click", function () {
     var userName = $("#user-name").val().trim();
     const email = $("#signup-email").val().trim();
     const pass = $("#signup-pass").val().trim();
-    //console.log(email, pass)
 
+    database.ref().push({
+        userName: userName,
+        email: email
+    })
+   
+    console.log(userName)
     firebase.auth().createUserWithEmailAndPassword(email, pass).then(cred => {
-        // console.log(cred.user)
-        //handle errors
-        //var errorCode = error.code;
-        //var errorMessage = error.message;
-
+        
         // Clears the text-boxes
          
         $("#user-name").val("");
@@ -55,31 +109,57 @@ $("#sign-up").on("click", function () {
     })
 })
 
-//LOG OUT FUNCTION
-$("#log-out").on("click", function () {
+//button for submitting comment 
+$("#submit").on("click", function (name, comment) {
 
-    firebase.auth().signOut();
-});
+    //grab user input 
+    var name = $("#name-input").val().trim();
+    var comment = $("#comment-input").val().trim();
+    
 
+    // Creates local "temporary" object for holding data 
+    var userData = {
+        name: name,
+        comment: comment,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
+    };
 
-//LOG IN FUNCTION
-$("#log-in").on("click", function () {
+    // Uploads user data to the database
+    database.ref().push(userData);
+    // Logs everything to console
+    console.log(userData.userName);
+    console.log(userData.comment);
 
-    //get user info
-    const email = $("#login-email").val().trim();
-    const pass = $("#login-pass").val().trim();
+    //create a new div 
+    var a = $("<div>");
+    var newComment = $("<p>").text(comment);
+    newComment.addClass("card-body");
+    a.addClass("card");
+    var newName = $("<footer>").text(name);
+    newName.addClass("blockquote-footer");
 
-    firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
-        // console.log(cred.user)
-        //SEND TO MAIN PAGE 
-        window.location.href = "index.html";
+    //append new name and comment to the new div 
+    a.append(newComment);
+    a.append(newName);
 
-        $("#login-email").val("");
-        $("#login-pass").val("");
+    $(".comment-div").append(a);
+
+    //clear text boxes 
+    $("#name-input").val("");
+    $("#comment-input").val("");
+})
+
+// Create Firebase event for adding comment to the database and a div in the html when a user adds an entry
+
+    database.ref().on("child_added", function (childSnapshot) {
+        // storing the snapshot.val() in a variable 
+        var sv = childSnapshot.val();
+        const name = sv.newName;
+        const comment = sv.newComment;
+
     })
-});
 
-
+})
 // variables
 var establishmentType = "";
 var zipLocation = "";
@@ -208,4 +288,3 @@ function invalidFormModal() {
         modal.style.display = "none";
     }
 }
-
