@@ -19,7 +19,7 @@ $(document).ready(function () {
         // var drugStore = $("#store-input").val().trim();
         if (needZip === "true") {
             var zipLocation = $("#location-input").val().trim();
-            var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&location=44101&radius=16000&limit=10&";
+            var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&location=44101&radius=16000&limit=10&open_now=true";
         } else {
             var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?categories=drugstores&open_now=true&latitude=" + latitude + "&longitude=" + longitude + "&radius=16000&limit=10&";
         }

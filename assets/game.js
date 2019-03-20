@@ -226,13 +226,11 @@ $("#launch-search").on("click", function (event) {
             },
         })
             .then(function (response) {
-                console.log(response);
                 var centerLat = response.region.center.latitude;
                 var centerLong = response.region.center.longitude;
                 initMap(centerLat, centerLong);
                 $("#searchField").hide();
                 $("#new-search").show();
-                console.log("latitude: ", centerLat, "longitude: ", centerLong);
                 for (var j = 1; j < response.businesses.length; j++) {
                     var restaurantName = response.businesses[j].name;
                     var restaurantAddress = response.businesses[j].location.address1 + ", " + response.businesses[j].location.city + ", " + response.businesses[j].location.state + " " + response.businesses[j].location.zip_code;
