@@ -130,6 +130,12 @@ h1 {
     cursor: pointer;
   } */
 
+.fa {
+    font-size:24px;
+}
+#spinIcon {
+    display: none;
+}
 .navbarMain {
     background-image: url(../assets/images/gradientPic.jpg);
 }

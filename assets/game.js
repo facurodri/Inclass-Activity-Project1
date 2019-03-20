@@ -29,13 +29,13 @@ $("#log-out").on("click", function () {
 $("#log-in").on("click", function () {
     event.preventDefault();
     //get user 
-   
+
     const email = $("#login-email").val().trim();
     const pass = $("#login-pass").val().trim();
-    
+
 
     firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
-     console.log("logged in");
+        console.log("logged in");
         //SEND TO MAIN PAGE 
         window.location.href = "index.html";
 
@@ -48,13 +48,13 @@ $("#log-in").on("click", function () {
 
 //keeping track of user authentification status
 firebase.auth().onAuthStateChanged(function (user) {
-    
+
     var user = firebase.auth().currentUser;
     console.log(user);
 
     if (user) {
         console.log("user logged in");
-    } 
+    }
     else {
         console.log("user logged out");
     }
@@ -84,10 +84,10 @@ $("#log-out").on("click", function () {
     // firebase.auth().signOut();
     console.log('this buttons');
     window.location.href = "loginPage.html";
- });
- $("#skip").on("click", function () {
-        window.location.href = "index.html";
- });
+});
+$("#skip").on("click", function () {
+    window.location.href = "index.html";
+});
 //SIGN UP FUNCTION
 $("#sign-up").on("click", function () {
 
@@ -100,12 +100,12 @@ $("#sign-up").on("click", function () {
         userName: userName,
         email: email
     })
-   
+
     console.log(userName)
     firebase.auth().createUserWithEmailAndPassword(email, pass).then(cred => {
-        
+
         // Clears the text-boxes
-         
+
         $("#user-name").val("");
         $("#signup-email").val("");
         $("#signup-pass").val("");
@@ -113,7 +113,7 @@ $("#sign-up").on("click", function () {
 });
 
 
-  
+
 
 // variables
 var establishmentType = "";
@@ -129,9 +129,9 @@ function displayJokes() {
     var queryURL = "https://official-joke-api.appspot.com/random_ten";
 
     $.ajax({
-            url: queryURL,
-            method: "GET"
-        })
+        url: queryURL,
+        method: "GET"
+    })
         .then(function (response) {
             // console.log(response);
             resultsJoke = response;
@@ -163,6 +163,7 @@ newSearch();
 
 $("#launch-search").on("click", function (event) {
     event.preventDefault();
+    $("#spinIcon").show();
     var establishmentType = $("#establishment-input").val().trim();
     var zipLocation = $("#location-input").val().trim();
     if (zipLocation.length != 5 || establishmentType === "" || zipLocation === "" || searchMiles === "") {
@@ -187,7 +188,6 @@ $("#launch-search").on("click", function (event) {
                 $("#searchField").hide();
                 $("#new-search").show();
                 $(".addSearch").show();
-                console.log("latitude: ", centerLat, "longitude: ", centerLong);
                 for (var j = 1; j < response.businesses.length; j++) {
                     var restaurantName = response.businesses[j].name;
                     var restaurantAddress = response.businesses[j].location.address1 + ", " + response.businesses[j].location.city + ", " + response.businesses[j].location.state + " " + response.businesses[j].location.zip_code;
@@ -198,7 +198,6 @@ $("#launch-search").on("click", function (event) {
                     var restaurantLongitude = response.businesses[j].coordinates.longitude;
                     marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
                     marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone).openPopup();
-                    console.log(restaurantName, "latitude: " + restaurantLatitude, "longitude: " + restaurantLongitude);
                 }
                 var restaurantName = response.businesses[0].name;
                 var restaurantAddress = response.businesses[0].location.address1 + ", " + response.businesses[0].location.city + ", " + response.businesses[0].location.state + " " + response.businesses[0].location.zip_code;
@@ -209,6 +208,7 @@ $("#launch-search").on("click", function (event) {
                 var restaurantLongitude = response.businesses[0].coordinates.longitude;
                 marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
                 marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone + "<br>Yelp rating: " + restaurantRating).openPopup();
+                $("#spinIcon").hide();
             });
     }
 });
@@ -229,8 +229,14 @@ function initMap(centerLat, centerLong) {
         id: 'mapbox.streets',
         accessToken: 'sk.eyJ1IjoiZWhhYnJhc3VsIiwiYSI6ImNqdDlhZTIzczAxemc0NHBtYXJzd2hrN2oifQ.zvIfEYP1713Hn7KORi25Nw'
     }).addTo(mymap);
+    var circle = L.circle([centerLat, centerLong], {
+        color: "red",
+        fillColor: "#f03",
+        fillOpacity: 0.25,
+        radius: 2000
+    }).addTo(mymap);
+    circle.bindPopup("<b>Primary search area").openPopup();
 }
-
 function drawPins(restaurantLatitude, restaurantLongitude) {
     var marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
     marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone).openPopup();
