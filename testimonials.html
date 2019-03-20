@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Comments Page</title>
+  <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+  <link rel="stylesheet" type="text/css" href="../Inclass-Activity-Project1/assets/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<body>
+
+  <h2>Star Rating</h2>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+  <span class="fa fa-star"></span>
+
+
+  <h3>Join the conversation. How did your first date go?</h3><br>
+  <div class="card">
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <p id="comment-display">I had the best time with my date. The food was amazing and the jokes on your app worked
+          like magic. lol</p>
+        <footer class="blockquote-footer" id="name-display">Facundo</footer>
+      </blockquote>
+    </div>
+  </div><br>
+  <div class="comment-div"></div> <br>
+  <button type="button" id="add-comment" class="btn btn-warning">Leave a comment</button>
+  <div id="myModalSuccess" class="modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <form>
+            <div class="form-group row">
+              <label for="name-input">Name:</label>
+              <input class="form-control" id="name-input" type="text">
+              <textarea class="form-control" placeholder="Tell us about your first date..." rows="3" id="comment-input"></textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary closeBtn" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-success closeBtn" id="submit" data-dismiss="modal">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="../Inclass-Activity-Project1/assets/game.js"></script>
+</body>
+
+</html>

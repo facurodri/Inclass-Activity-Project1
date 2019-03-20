@@ -14,23 +14,70 @@ var config = {
     storageBucket: "first-project-9f391.appspot.com",
     messagingSenderId: "290744685174"
 };
+
 firebase.initializeApp(config);
 
-//get data
-firebase.firestore().collection("first-project").get().then(snapshot => {
-    //    console.log(snapshot.docs)
+
+//LOG OUT FUNCTION
+$("#log-out").on("click", function () {
+    firebase.auth().signOut();
+    console.log("logged out");
+    window.location.href = "loginPage.html";
 });
 
+//LOG IN FUNCTION
+$("#log-in").on("click", function () {
+    event.preventDefault();
+    //get user 
+   
+    const email = $("#login-email").val().trim();
+    const pass = $("#login-pass").val().trim();
+    
+
+    firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
+     console.log("logged in");
+        //SEND TO MAIN PAGE 
+        window.location.href = "index.html";
+
+        $("#login-email").val("");
+        $("#login-pass").val("");
+
+    })
+
+});
 
 //keeping track of user authentification status
 firebase.auth().onAuthStateChanged(function (user) {
+    
+    var user = firebase.auth().currentUser;
+    console.log(user);
+
     if (user) {
-        // User is signed in.
-        // console.log("user logged in: " + user)
-    } else {
-        // console.log("user logged out");
+        console.log("user logged in");
+    } 
+    else {
+        console.log("user logged out");
     }
 });
+//TESTIMONIALS SECTION
+var modal = document.getElementById('myModalSuccess');
+
+function uploadSuccess() {
+    modal.style.display = "block";
+};
+
+$("#add-comment").on("click", function (event) {
+    event.preventDefault();
+
+    uploadSuccess();
+    //button for closing modal 
+    $(".closeBtn").on("click", function () {
+        modal.style.display = "none";
+
+    });
+});
+
+
 
 //LOG OUT FUNCTION
 $("#log-out").on("click", function () {
@@ -39,58 +86,34 @@ $("#log-out").on("click", function () {
     window.location.href = "loginPage.html";
  });
  $("#skip").on("click", function () {
-    // firebase.auth().signOut();
-    console.log('this buttons');
-    window.location.href = "index.html";
+        window.location.href = "index.html";
  });
 //SIGN UP FUNCTION
 $("#sign-up").on("click", function () {
 
     // Grab values from text-boxes
-    const firstName = $("#first-name").val().trim();
-    const lastName = $("#last-name").val().trim();
+    var userName = $("#user-name").val().trim();
     const email = $("#signup-email").val().trim();
     const pass = $("#signup-pass").val().trim();
-    //console.log(email, pass)
 
+    database.ref().push({
+        userName: userName,
+        email: email
+    })
+   
+    console.log(userName)
     firebase.auth().createUserWithEmailAndPassword(email, pass).then(cred => {
-        // console.log(cred.user)
-        //handle errors
-        //var errorCode = error.code;
-        //var errorMessage = error.message;
-
+        
         // Clears the text-boxes
-        $("#first-name").val("");
-        $("#last-name").val("");
+         
+        $("#user-name").val("");
         $("#signup-email").val("");
         $("#signup-pass").val("");
     })
-})
-
-//LOG OUT FUNCTION
-// $("#log-out").on("click", function () {
-
-//     firebase.auth().signOut();
-// });
-
-
-//LOG IN FUNCTION
-$("#log-in").on("click", function () {
-
-    //get user info
-    const email = $("#login-email").val().trim();
-    const pass = $("#login-pass").val().trim();
-
-    firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
-        // console.log(cred.user)
-        //SEND TO MAIN PAGE 
-        window.location.href = "index.html";
-
-        $("#login-email").val("");
-        $("#login-pass").val("");
-    })
 });
 
+
+  
 
 // variables
 var establishmentType = "";
@@ -106,9 +129,9 @@ function displayJokes() {
     var queryURL = "https://official-joke-api.appspot.com/random_ten";
 
     $.ajax({
-        url: queryURL,
-        method: "GET"
-    })
+            url: queryURL,
+            method: "GET"
+        })
         .then(function (response) {
             // console.log(response);
             resultsJoke = response;
@@ -220,4 +243,3 @@ function invalidFormModal() {
         modal.style.display = "none";
     }
 }
-

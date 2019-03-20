@@ -13,6 +13,8 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <!-- Css style Sheet-->
     <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
     <!-- Required map style Sheet-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
         integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
@@ -28,14 +30,12 @@
         <i class="material-icons">menu</i>
     </a>
     <ul class="left hide-on-med-and-down">
-        <li><a href="#!">Account Name Here</a></li>
-    </ul>
+            <li><a href="loginPage.html"id="log-out">Log out</a></li>
+        </ul>
     <ul id="dropdown1" class="right hide-on-med-and-down">
         <li><a href="index.html">Restaurant Search</a></li>
         <li class="divider"></li>
         <li><a href="icebreaker.html">Break the Ice</a></li>
-        <li class="divider"></li>
-        <li><a href="#!">Rate Date</a></li>
         <li class="divider"></li>
         <li><a href="drugstore.html">Drugstore</a></li>
         <li class="divider"></li>
@@ -46,8 +46,6 @@
     <li><a href="index.html">Restaurant Search</a></li>
     <li class="divider"></li>
     <li><a href="icebreaker.html">Break the Ice</a></li>
-    <li class="divider"></li>
-    <li><a href="#!">Rate Date</a></li>
     <li class="divider"></li>
     <li><a href="drugstore.html">Drugstore</a></li>
     <li class="divider"></li>
@@ -70,8 +68,8 @@
                 <input type="text" class="form-control" id="location-input" maxlength="5" minlength="5"
                     placeholder="00000" pattern="[0-9]{5}">
             </div>
-            <div class="form-group formRest">
-                <label for="costRange">$ $$ $$$</label>
+            <div class="form-group">
+                <label for="costRange"><strong>$ $$ $$$</strong></label>
                 <select type="text" class="form-control" id="cost-input">
                     <option value="1">$</option>
                     <option value="2">$$</option>
@@ -109,9 +107,7 @@
             </div>
         </div>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase-firestore.js"></script>
+    
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
         integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="

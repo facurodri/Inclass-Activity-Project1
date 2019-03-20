@@ -16,12 +16,12 @@ $(document).ready(function () {
         $("#my-location").empty();
         // marker.clearLayers();
         // initMap(latitude, longitude);
-        var drugStore = $("#store-input").val().trim();
+        // var drugStore = $("#store-input").val().trim();
         if (needZip === "true") {
             var zipLocation = $("#location-input").val().trim();
             var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&location=44101&radius=16000&limit=10&";
         } else {
-            var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&latitude=" + latitude + "&longitude=" + longitude + "&radius=16000&limit=10&";
+            var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?categories=drugstores&open_now=true&latitude=" + latitude + "&longitude=" + longitude + "&radius=16000&limit=10&";
         }
         $.ajax({
             url: queryURL,
@@ -80,8 +80,13 @@ function initMap(latitude, longitude) {
         id: 'mapbox.streets',
         accessToken: 'sk.eyJ1IjoiZWhhYnJhc3VsIiwiYSI6ImNqdDlhZTIzczAxemc0NHBtYXJzd2hrN2oifQ.zvIfEYP1713Hn7KORi25Nw'
     }).addTo(mymap);
-    var marker = L.marker([latitude, longitude]).addTo(mymap);
-    marker.bindPopup("<b>You are here").openPopup();
+    var circle = L.circle([latitude, longitude], {
+        color: "red",
+        fillColor: "#f03",
+        fillOpacity: 0.5,
+        radius: 500
+    }).addTo(mymap);
+    circle.bindPopup("<b>You are here").openPopup();
 }
 function drawPins(restaurantLatitude, restaurantLongitude) {
     var marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
