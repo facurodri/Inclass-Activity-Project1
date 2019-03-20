@@ -32,6 +32,17 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 
+//LOG OUT FUNCTION
+$("#log-out").on("click", function () {
+    // firebase.auth().signOut();
+    console.log('this buttons');
+    window.location.href = "loginPage.html";
+ });
+ $("#skip").on("click", function () {
+    // firebase.auth().signOut();
+    console.log('this buttons');
+    window.location.href = "index.html";
+ });
 //SIGN UP FUNCTION
 $("#sign-up").on("click", function () {
 
@@ -57,10 +68,10 @@ $("#sign-up").on("click", function () {
 })
 
 //LOG OUT FUNCTION
-$("#log-out").on("click", function () {
+// $("#log-out").on("click", function () {
 
-    firebase.auth().signOut();
-});
+//     firebase.auth().signOut();
+// });
 
 
 //LOG IN FUNCTION
