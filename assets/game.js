@@ -187,6 +187,7 @@ $("#launch-search").on("click", function (event) {
                 initMap(centerLat, centerLong);
                 $("#searchField").hide();
                 $("#new-search").show();
+                $(".addSearch").show();
                 console.log("latitude: ", centerLat, "longitude: ", centerLong);
                 for (var j = 1; j < response.businesses.length; j++) {
                     var restaurantName = response.businesses[j].name;

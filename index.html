@@ -25,7 +25,7 @@
 </head>
 <!-- Dropdown Structure -->
 <nav class="nav-wrapper navbarMain">
-    <a href="#" class="brand-logo center"><i class="material-icons">favorite_border</i></a>
+    <a href="#" class="brand-logo center">Dinner & Chill</a>
     <a href="#" class="sidenav-trigger right" data-target="mobileLinks">
         <i class="material-icons">menu</i>
     </a>
@@ -33,27 +33,31 @@
             <li><a href="loginPage.html"id="log-out">Log out</a></li>
         </ul>
     <ul id="dropdown1" class="right hide-on-med-and-down">
-        <li><a href="index.html">Restaurant Search</a></li>
+        <li><a href="index.html">Dinner</a></li>
         <li class="divider"></li>
         <li><a href="icebreaker.html">Break the Ice</a></li>
         <li class="divider"></li>
-        <li><a href="drugstore.html">Drugstore</a></li>
+        <li><a href="drugstore.html">Chill</a></li>
         <li class="divider"></li>
         <li><a href="loginPage.html">Login</a></li>
     </ul>
 </nav>
 <ul class="sidenav" id="mobileLinks">
-    <li><a href="index.html">Restaurant Search</a></li>
+    <li><a href="index.html">Dinner</a></li>
     <li class="divider"></li>
     <li><a href="icebreaker.html">Break the Ice</a></li>
     <li class="divider"></li>
-    <li><a href="drugstore.html">Drugstore</a></li>
+    <li><a href="drugstore.html">Chill</a></li>
     <li class="divider"></li>
 </ul>
-
+<div id="invalidZIPCode" class="modal">
+            <div class="modal-content">
+                <p>Please provide complete data for all fields<br>(Click to close)</p>
+            </div>
+        </div>
 <body class="mainBody">
     <div class="text center">
-        <h1 class="display-1">Search The Night Away</h1>
+        <h1 class="display-1">What Are You Hungry For?</h1>
     </div>
     <div class="container addSearch">
         <div class="col-lg-12 table-header"></div>
@@ -91,12 +95,8 @@
     <br>
     <br>
     <br>
-    <div class="container addSearch">
-        <div id="invalidZIPCode" class="modal">
-            <div class="modal-content">
-                <p>Please provide complete data for all fields<br>(Click to close)</p>
-            </div>
-        </div>
+    <div class="container addSearch" id="restMap">
+        
             <div class="col m12">
             <div id="mymap"></div>
         </div>
