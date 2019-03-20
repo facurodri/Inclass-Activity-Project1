@@ -163,6 +163,7 @@ newSearch();
 
 $("#launch-search").on("click", function (event) {
     event.preventDefault();
+    $("#searchField").hide();
     $("#spinIcon").show();
     var establishmentType = $("#establishment-input").val().trim();
     var zipLocation = $("#location-input").val().trim();
@@ -185,7 +186,6 @@ $("#launch-search").on("click", function (event) {
                 var centerLat = response.region.center.latitude;
                 var centerLong = response.region.center.longitude;
                 initMap(centerLat, centerLong);
-                $("#searchField").hide();
                 $("#new-search").show();
                 $(".addSearch").show();
                 for (var j = 1; j < response.businesses.length; j++) {
@@ -229,12 +229,12 @@ function initMap(centerLat, centerLong) {
         id: 'mapbox.streets',
         accessToken: 'sk.eyJ1IjoiZWhhYnJhc3VsIiwiYSI6ImNqdDlhZTIzczAxemc0NHBtYXJzd2hrN2oifQ.zvIfEYP1713Hn7KORi25Nw'
     }).addTo(mymap);
-    var circle = L.circle([centerLat, centerLong], {
-        color: "red",
-        fillColor: "#f03",
-        fillOpacity: 0.25,
-        radius: 2000
-    }).addTo(mymap);
+    // var circle = L.circle([centerLat, centerLong], {
+    //     color: "red",
+    //     fillColor: "#f03",
+    //     fillOpacity: 0.25,
+    //     radius: 2000
+    // }).addTo(mymap);
     circle.bindPopup("<b>Primary search area").openPopup();
 }
 function drawPins(restaurantLatitude, restaurantLongitude) {
