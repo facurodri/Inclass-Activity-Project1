@@ -21,6 +21,7 @@ firebase.initializeApp(config);
 //LOG OUT FUNCTION
 $("#log-out").on("click", function () {
     firebase.auth().signOut();
+    console.log("logged out");
     window.location.href = "loginPage.html";
 });
 
@@ -34,7 +35,7 @@ $("#log-in").on("click", function () {
     
 
     firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
-    
+     console.log("logged in");
         //SEND TO MAIN PAGE 
         window.location.href = "index.html";
 
@@ -42,17 +43,14 @@ $("#log-in").on("click", function () {
         $("#login-pass").val("");
 
     })
-//ANONYMOUS SIGN IN
-
-$("#skip").on("click", function () {
-    window.location.href = "index.html";
 
 });
 
 //keeping track of user authentification status
 firebase.auth().onAuthStateChanged(function (user) {
-    console.log(user)
+    
     var user = firebase.auth().currentUser;
+    console.log(user);
 
     if (user) {
         console.log("user logged in");
@@ -79,12 +77,17 @@ $("#add-comment").on("click", function (event) {
     });
 });
 
-var database = firebase.database();
-var name = "";
-var comment = "";
-var userName = "";
 
 
+//LOG OUT FUNCTION
+$("#log-out").on("click", function () {
+    // firebase.auth().signOut();
+    console.log('this buttons');
+    window.location.href = "loginPage.html";
+ });
+ $("#skip").on("click", function () {
+        window.location.href = "index.html";
+ });
 //SIGN UP FUNCTION
 $("#sign-up").on("click", function () {
 
@@ -107,59 +110,11 @@ $("#sign-up").on("click", function () {
         $("#signup-email").val("");
         $("#signup-pass").val("");
     })
-})
+});
 
-//button for submitting comment 
-$("#submit").on("click", function (name, comment) {
 
-    //grab user input 
-    var name = $("#name-input").val().trim();
-    var comment = $("#comment-input").val().trim();
-    
+  
 
-    // Creates local "temporary" object for holding data 
-    var userData = {
-        name: name,
-        comment: comment,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
-    };
-
-    // Uploads user data to the database
-    database.ref().push(userData);
-    // Logs everything to console
-    console.log(userData.userName);
-    console.log(userData.comment);
-
-    //create a new div 
-    var a = $("<div>");
-    var newComment = $("<p>").text(comment);
-    newComment.addClass("card-body");
-    a.addClass("card");
-    var newName = $("<footer>").text(name);
-    newName.addClass("blockquote-footer");
-
-    //append new name and comment to the new div 
-    a.append(newComment);
-    a.append(newName);
-
-    $(".comment-div").append(a);
-
-    //clear text boxes 
-    $("#name-input").val("");
-    $("#comment-input").val("");
-})
-
-// Create Firebase event for adding comment to the database and a div in the html when a user adds an entry
-
-    database.ref().on("child_added", function (childSnapshot) {
-        // storing the snapshot.val() in a variable 
-        var sv = childSnapshot.val();
-        const name = sv.newName;
-        const comment = sv.newComment;
-
-    })
-
-})
 // variables
 var establishmentType = "";
 var zipLocation = "";
@@ -231,6 +186,8 @@ $("#launch-search").on("click", function (event) {
                 initMap(centerLat, centerLong);
                 $("#searchField").hide();
                 $("#new-search").show();
+                $(".addSearch").show();
+                console.log("latitude: ", centerLat, "longitude: ", centerLong);
                 for (var j = 1; j < response.businesses.length; j++) {
                     var restaurantName = response.businesses[j].name;
                     var restaurantAddress = response.businesses[j].location.address1 + ", " + response.businesses[j].location.city + ", " + response.businesses[j].location.state + " " + response.businesses[j].location.zip_code;
