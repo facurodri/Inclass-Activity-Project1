@@ -80,7 +80,7 @@ function initMap(latitude, longitude) {
         color: "red",
         fillColor: "#f03",
         fillOpacity: 0.5,
-        radius: 500
+        radius: 250
     }).addTo(mymap);
     circle.bindPopup("<b>You are here").openPopup();
 }
