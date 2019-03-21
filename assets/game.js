@@ -235,7 +235,7 @@ function initMap(centerLat, centerLong) {
     //     fillOpacity: 0.25,
     //     radius: 2000
     // }).addTo(mymap);
-    circle.bindPopup("<b>Primary search area").openPopup();
+    // circle.bindPopup("<b>Primary search area").openPopup();
 }
 function drawPins(restaurantLatitude, restaurantLongitude) {
     var marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
