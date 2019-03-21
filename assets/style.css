@@ -1,24 +1,23 @@
-.display-1, h3{
+.display-1, h3 {
     color:white;
     font-family: cursive;
     text-shadow: 5px 3px 1px rgb(144, 6, 29);
     margin-top:3rem;
 }
-.modal h2{
+.modal h2 {
     margin:1.5rem 2rem 1.5rem;
 }
-.modalHeader{
+.modalHeader {
     margin-top:3rem;
     color:rgb(173, 27, 105);
     font-family: cursive;
     text-shadow: 2px 3px 3px orange;
 }
-.mainBody{
+.mainBody {
     background-image: url(../assets/images/gradientPic.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     height: auto;
-    
 }
 .search-button {
     margin: 0 0 20px 0;
@@ -34,7 +33,6 @@
     color: white;
     text-shadow: 1px 2px 3px black;
 }
-
 label {
     font-size: 1.25rem;
     color:rgb(255, 255, 255);
@@ -52,7 +50,6 @@ button {
     margin: 5px; 
     text-shadow: 1px 2px 2px black;
 }
-
 input {
   color:white;
   text-shadow: 1px 2px 2px rgb(121, 8, 8); 
@@ -66,7 +63,6 @@ input {
     color: rgb(5, 5, 5);
     text-shadow: 2px 2px 2px white;
 }
-
 .border-light{
     background-color: #fff;
     background-position: center;
@@ -90,7 +86,6 @@ input {
     color:#fff;
     /* text-shadow: 2px 2px 2px rgb(29, 0, 0); */
 }
- 
 #spinIcon {
     display: none;
     color:white;
