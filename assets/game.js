@@ -119,6 +119,9 @@ var jokeSpot="";
 var gifBox=[];
 var giphy = [];
 var gifImage="";
+//  function displayContainer (){
+     
+//  } 
 
 function displayJokes() {
     // displayGif ();
@@ -135,7 +138,7 @@ function displayJokes() {
                 var jokeDiv = $("<div class='card center'>");
                 jokeDiv.addClass("jokes col l4 m6 s12");
                 // jokeDiv.append("<div class='card-image'>");
-                // jokeDiv.append(gifBox);
+                // jokeDiv.append(gifBox[i]);
                 jokeDiv.append("<div class='card-content'>");
                 jokeQ = resultsJoke[i].setup;
                 var jQ = $("<p>").text(jokeQ);
@@ -161,16 +164,16 @@ function displayJokes() {
 //             for (var i = 0; i < giphy.length; i++) {
 //                 gifImage = $("<img>");
 //                 gifImage.attr("src", giphy[i].images.fixed_height.url);
-//                 // $(".giphySpot").append(gifImage);
-//                 gifBox += gifImage;
+//                 $(".giphySpot").append(gifImage);
+//                 gifBox = gifImage;
 //             }           
 //     });
 // }
 
 
 // Call the display joke
-displayJokes();
 // displayGif ();
+displayJokes();
 newSearch();
 
 $("#launch-search").on("click", function (event) {
@@ -263,6 +266,6 @@ function invalidFormModal() {
     modal.style.display = "block";
     modal.onclick = function () {
         modal.style.display = "none";
-        
+
     }
 }
