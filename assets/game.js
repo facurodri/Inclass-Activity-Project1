@@ -191,6 +191,8 @@ $("#launch-search").on("click", function (event) {
         var searchRadius = searchMiles * 1600;
         var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=10&";
         // AJAX call to Yelp API; XHR function puts API key into proper format
+        $("#searchField").hide();
+        $("#spinIcon").show();
         $.ajax({
             url: queryURL,
             method: 'GET',
@@ -199,9 +201,7 @@ $("#launch-search").on("click", function (event) {
                 xhr.setRequestHeader('Access-Control-Allow-Origin');
             },
         })
-        .then(function (response) {
-            $("#searchField").hide();
-            $("#spinIcon").show();
+            .then(function (response) {
                 // pull longitdue and latitude for center point of map from Yelp (the geographic center of all returned search results) 
                 var centerLat = response.region.center.latitude;
                 var centerLong = response.region.center.longitude;
