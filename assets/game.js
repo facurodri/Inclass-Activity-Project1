@@ -115,8 +115,13 @@ $("#sign-up").on("click", function () {
 var jokeQ = "";
 var punchLine = "";
 var resultsJoke = [];
+var jokeSpot="";
+var gifBox=[];
+var giphy = [];
+var gifImage="";
 
 function displayJokes() {
+    // displayGif ();
     var queryURL = "https://official-joke-api.appspot.com/random_ten";
 
     $.ajax({
@@ -128,8 +133,10 @@ function displayJokes() {
             // cycle through each of the elements of the results array
             for (i = 0; i < resultsJoke.length; i++) {
                 var jokeDiv = $("<div class='card center'>");
-                jokeDiv.addClass("jokes col l4 m6 s12")
-                jokeDiv.append("<div ='card-content'>");
+                jokeDiv.addClass("jokes col l4 m6 s12");
+                // jokeDiv.append("<div class='card-image'>");
+                // jokeDiv.append(gifBox);
+                jokeDiv.append("<div class='card-content'>");
                 jokeQ = resultsJoke[i].setup;
                 var jQ = $("<p>").text(jokeQ);
                 jokeDiv.append(jQ);
@@ -137,14 +144,33 @@ function displayJokes() {
                 var pL = $("<p>").text(punchLine);
                 jokeDiv.append(pL);
                 $(".jokesContainer").append(jokeDiv);
+                jokeSpot = jokeDiv;
             }
+
         });
 }
-$(".card-link").on("click", function () {
-    displayJokes();
-})
+
+// function displayGif (){
+//      var queryURL2 = "https://api.giphy.com/v1/gifs/search?q=laughing&api_key=jGgY1cTVHzVEnPojQe6k9tywEwdrcQoZ&limit=10&rating=pg";
+//     $.ajax({
+//         url: queryURL2,
+//         method: "GET"
+//     })
+//         .then(function (response2) {
+//             giphy = response2.data;
+//             for (var i = 0; i < giphy.length; i++) {
+//                 gifImage = $("<img>");
+//                 gifImage.attr("src", giphy[i].images.fixed_height.url);
+//                 // $(".giphySpot").append(gifImage);
+//                 gifBox += gifImage;
+//             }           
+//     });
+// }
+
+
 // Call the display joke
 displayJokes();
+// displayGif ();
 newSearch();
 
 $("#launch-search").on("click", function (event) {
@@ -237,5 +263,6 @@ function invalidFormModal() {
     modal.style.display = "block";
     modal.onclick = function () {
         modal.style.display = "none";
+        
     }
 }
