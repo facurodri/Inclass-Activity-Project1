@@ -89,11 +89,8 @@ input {
 .form-group {
     color:#fff;
     /* text-shadow: 2px 2px 2px rgb(29, 0, 0); */
- }
- 
-.fa {
-    font-size:24px;
 }
+ 
 #spinIcon {
     display: none;
     color:white;
