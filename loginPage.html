@@ -42,33 +42,36 @@
 </ul>
 <div class="modal" id="terms">
     <div class="model-content">
-        <h4>Sign Up!</h4>
+        <h2 class="modalHeader center-align">Sign Up!</h2>
         <form class="needs-validation" novalidate>
             <div class="form-row center-align">
                 <div>
                     <label for="validationCustom01" class="labelModal">First name</label>
-                    <input type="text" class="form-control modal1 " id="first-name" placeholder="Jane" required>
+                    <input type="text" class="form-control modalBox" id="first-name" placeholder="Jane" required>
                     <div class="valid-feedback">
                     </div>
                 </div>
                 <div>
                     <label for="validationCustom02" class="labelModal">Last name</label>
-                    <input type="text" class="form-control" id="last-name" placeholder="Doe" required>
+                    <input type="text" class="form-control modalBox" id="last-name" placeholder="Doe" required>
                     <div class="valid-feedback">
                     </div>
                 </div>
                 <div class="form-group" id="signup-form">
                     <label for="exampleInputEmail1" class="labelModal">Email address</label>
-                    <input type="email" class="form-control" id="signup-email" aria-describedby="emailHelp"
+                    <input type="email" class="form-control modalBox" id="signup-email" aria-describedby="emailHelp"
                         placeholder="Enter email" required />
                     <label for="exampleInputPassword1" class="labelModal">Password</label>
-                    <input type="password" class="form-control" id="signup-pass" placeholder="Password" required>
+                    <input type="password" class="form-control modalBox" id="signup-pass" placeholder="Password" required>
                 </div>
                 <br>
                 <div class="modal-footer">
                     <button class="btn #ff6f00 amber darken-2 waves-effect waves-light" id="sign-up" type="submit"
                         name="action">Submit
                         <i class="material-icons right">add</i>
+                    </button>
+                    <button class="btn #ff6f00 blue darken-2 waves-effect waves-light" type="close"                        >Cancel
+                        <i class="material-icons right">close</i>
                     </button>
                 </div>
         </form>
@@ -79,7 +82,9 @@
 <body class="mainBody">
     </div>
     <div class="section no-pad-bot" id="index-banner">
-        <h1 class="display-1 center">Sign In</h1>
+        <h1 class="display-1 center">Dinner & Chill</h1>
+        
+        <h3 class="center-align">Sign In</h3>
     </div>
     <br>
     <div class="container valign-wrapper center">
@@ -95,15 +100,9 @@
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control" id="login-pass" placeholder="Password">
                     </div>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="autoSizingCheck">
-                            Remember me
-                        </label>
-                    </div>
                     <br>
                     <a href="#!" class="btn #e53935 red darken-1 center-align waves-effect waves-light hoverable"
-                        id="log-in" type="submit" name="action">Log In<i class="material-icons right">account_circle</i>
+                        id="log-in" name="action">Log In<i class="material-icons right">account_circle</i>
                     </a>
                     <a href="index.html" class="btn #ff5722 deep-orange waves-effect waves-light hoverable"
                         id="skip">SKIP<i class="material-icons right">arrow_forward</i></a>
