@@ -105,24 +105,15 @@ $("#sign-up").on("click", function () {
     firebase.auth().createUserWithEmailAndPassword(email, pass).then(cred => {
 
         // Clears the text-boxes
-
         $("#user-name").val("");
         $("#signup-email").val("");
         $("#signup-pass").val("");
     })
 });
 
-
-
-
-// variables
-var establishmentType = "";
-var zipLocation = "";
-var searchRadius = "";
-var costRange = "";
+// Global variables
 var jokeQ = "";
 var punchLine = "";
-var mapAddress = "";
 var resultsJoke = [];
 
 function displayJokes() {
@@ -133,47 +124,46 @@ function displayJokes() {
         method: "GET"
     })
         .then(function (response) {
-            // console.log(response);
             resultsJoke = response;
             // cycle through each of the elements of the results array
             for (i = 0; i < resultsJoke.length; i++) {
-
                 var jokeDiv = $("<div class='card center'>");
                 jokeDiv.addClass("jokes col l4 m6 s12")
                 jokeDiv.append("<div ='card-content'>");
                 jokeQ = resultsJoke[i].setup;
                 var jQ = $("<p>").text(jokeQ);
                 jokeDiv.append(jQ);
-
                 punchLine = resultsJoke[i].punchline;
                 var pL = $("<p>").text(punchLine);
                 jokeDiv.append(pL);
-
                 $(".jokesContainer").append(jokeDiv);
-
             }
         });
 }
 $(".card-link").on("click", function () {
     displayJokes();
 })
-
+// Call the display joke
 displayJokes();
 newSearch();
 
 $("#launch-search").on("click", function (event) {
     event.preventDefault();
+    // Hide main search field to make room for map
     $("#searchField").hide();
+    // Run spinning circle while API call being made
     $("#spinIcon").show();
+    // Capture data entered by user and confirm that form filled out correctly and completely 
     var establishmentType = $("#establishment-input").val().trim();
     var zipLocation = $("#location-input").val().trim();
-    if (zipLocation.length != 5 || establishmentType === "" || zipLocation === "" || searchMiles === "") {
+        if (zipLocation.length != 5 || establishmentType === "" || zipLocation === "" || searchMiles === "") {
         invalidFormModal();
     } else {
         var searchMiles = $("#radius-input").val().trim();
         var costRange = $("#cost-input").val().trim();
         var searchRadius = searchMiles * 1600;
         var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + establishmentType + "&location=" + zipLocation + "&radius=" + searchRadius + "&price=" + costRange + "&limit=10&";
+        // AJAX call to Yelp API; XHR function puts API key into proper format
         $.ajax({
             url: queryURL,
             method: 'GET',
@@ -183,11 +173,16 @@ $("#launch-search").on("click", function (event) {
             },
         })
             .then(function (response) {
+                // pull longitdue and latitude for center point of map from Yelp (the geographic center of all returned search results) 
                 var centerLat = response.region.center.latitude;
                 var centerLong = response.region.center.longitude;
+                // show div containing restaurant map
+                $("#restMap").show();
+                // initialize map 
                 initMap(centerLat, centerLong);
+                // Show 'New Search' button
                 $("#new-search").show();
-                $(".addSearch").show();
+                // iterate through responses
                 for (var j = 1; j < response.businesses.length; j++) {
                     var restaurantName = response.businesses[j].name;
                     var restaurantAddress = response.businesses[j].location.address1 + ", " + response.businesses[j].location.city + ", " + response.businesses[j].location.state + " " + response.businesses[j].location.zip_code;
@@ -199,28 +194,29 @@ $("#launch-search").on("click", function (event) {
                     marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
                     marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone).openPopup();
                 }
+                // post the first entry in response array last to show its pop up when map fully populated
                 var restaurantName = response.businesses[0].name;
                 var restaurantAddress = response.businesses[0].location.address1 + ", " + response.businesses[0].location.city + ", " + response.businesses[0].location.state + " " + response.businesses[0].location.zip_code;
                 var restaurantPhone = response.businesses[0].display_phone;
                 var restaurantRating = response.businesses[0].rating;
-                var ID = response.businesses[0].id;
                 var restaurantLatitude = response.businesses[0].coordinates.latitude;
                 var restaurantLongitude = response.businesses[0].coordinates.longitude;
                 marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
                 marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone + "<br>Yelp rating: " + restaurantRating).openPopup();
+                // hide the spinning icon
                 $("#spinIcon").hide();
             });
     }
 });
-
+// New search button; reloads page to clear all map data
 function newSearch() {
     $("#new-search").on("click", function (event) {
         $("#searchField").show();
         $("#new-search").hide();
         location.reload();
-
     })
 }
+// Initalizes map using data from Yelp API call
 function initMap(centerLat, centerLong) {
     mymap = L.map("mymap").setView([centerLat, centerLong], 13);
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -229,19 +225,13 @@ function initMap(centerLat, centerLong) {
         id: 'mapbox.streets',
         accessToken: 'sk.eyJ1IjoiZWhhYnJhc3VsIiwiYSI6ImNqdDlhZTIzczAxemc0NHBtYXJzd2hrN2oifQ.zvIfEYP1713Hn7KORi25Nw'
     }).addTo(mymap);
-    // var circle = L.circle([centerLat, centerLong], {
-    //     color: "red",
-    //     fillColor: "#f03",
-    //     fillOpacity: 0.25,
-    //     radius: 2000
-    // }).addTo(mymap);
-    // circle.bindPopup("<b>Primary search area").openPopup();
 }
+// Places a pin for each restaurant onto the map and binds restaurant information to a popup
 function drawPins(restaurantLatitude, restaurantLongitude) {
     var marker = L.marker([restaurantLatitude, restaurantLongitude]).addTo(mymap);
     marker.bindPopup("<b>" + restaurantName + "</b><br>" + restaurantAddress + "<br>" + restaurantPhone).openPopup();
 }
-
+// modal invoked when search form not completely and correctly filled out
 function invalidFormModal() {
     var modal = document.getElementById('invalidZIPCode');
     modal.style.display = "block";

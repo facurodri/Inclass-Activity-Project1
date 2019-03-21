@@ -1,7 +1,7 @@
 // variables
-var establishmentType = "";
-var latitude = "";
-var longitude = "";
+// var establishmentType = "";
+// var latitude = "";
+// var longitude = "";
 var mymap = "";
 var needZip = "false";
 
@@ -15,6 +15,7 @@ $(document).ready(function () {
         event.preventDefault();
         $("#my-location").empty();
         $("#spinIcon").show();
+        $("#restMap").show();
         if (needZip === "true") {
             var zipLocation = $("#location-input").val().trim();
             var queryURL = "https://cors-anywhere.herokuapp.com/api.yelp.com/v3/businesses/search?term=" + drugStore + "&location=44101&radius=16000&limit=10&open_now=true";
@@ -30,8 +31,7 @@ $(document).ready(function () {
             },
         })
             .then(function (response) {
-                var centerLat = response.region.center.latitude;
-                var centerLong = response.region.center.longitude;
+                console.log(response)   
                 for (var j = 1; j < response.businesses.length; j++) {
                     var restaurantName = response.businesses[j].name;
                     var restaurantAddress = response.businesses[j].location.address1 + ", " + response.businesses[j].location.city + ", " + response.businesses[j].location.state + " " + response.businesses[j].location.zip_code;
