@@ -176,13 +176,11 @@ newSearch();
 $("#launch-search").on("click", function (event) {
     event.preventDefault();
     // Hide main search field to make room for map
-    $("#searchField").hide();
     // Run spinning circle while API call being made
-    $("#spinIcon").show();
     // Capture data entered by user and confirm that form filled out correctly and completely 
     var establishmentType = $("#establishment-input").val().trim();
     var zipLocation = $("#location-input").val().trim();
-        if (zipLocation.length != 5 || establishmentType === "" || zipLocation === "" || searchMiles === "") {
+    if (zipLocation.length != 5 || establishmentType === "" || zipLocation === "" || searchMiles === "") {
         invalidFormModal();
     } else {
         var searchMiles = $("#radius-input").val().trim();
@@ -198,7 +196,9 @@ $("#launch-search").on("click", function (event) {
                 xhr.setRequestHeader('Access-Control-Allow-Origin');
             },
         })
-            .then(function (response) {
+        .then(function (response) {
+            $("#searchField").hide();
+            $("#spinIcon").show();
                 // pull longitdue and latitude for center point of map from Yelp (the geographic center of all returned search results) 
                 var centerLat = response.region.center.latitude;
                 var centerLong = response.region.center.longitude;
