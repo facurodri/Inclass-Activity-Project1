@@ -34,8 +34,8 @@ $("#log-in").on("click", function () {
     const pass = $("#login-pass").val().trim();
 
 
-    firebase.auth().signInWithEmailAndPassword(email, pass).then(cred => {
-        console.log("logged in");
+    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+        
         //SEND TO MAIN PAGE 
         window.location.href = "index.html";
 
@@ -46,19 +46,6 @@ $("#log-in").on("click", function () {
 
 });
 
-//keeping track of user authentification status
-firebase.auth().onAuthStateChanged(function (user) {
-
-    var user = firebase.auth().currentUser;
-    console.log(user);
-
-    if (user) {
-        console.log("user logged in");
-    }
-    else {
-        console.log("user logged out");
-    }
-});
 //TESTIMONIALS SECTION
 var modal = document.getElementById('myModalSuccess');
 
@@ -76,8 +63,6 @@ $("#add-comment").on("click", function (event) {
 
     });
 });
-
-
 
 //LOG OUT FUNCTION
 $("#log-out").on("click", function () {
@@ -101,7 +86,6 @@ $("#sign-up").on("click", function () {
         email: email
     })
 
-    console.log(userName)
     firebase.auth().createUserWithEmailAndPassword(email, pass).then(cred => {
 
         // Clears the text-boxes
