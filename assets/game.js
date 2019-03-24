@@ -115,13 +115,13 @@ $("#sign-up").on("click", function () {
 var jokeQ = "";
 var punchLine = "";
 var resultsJoke = [];
-var jokeSpot="";
-var gifBox=[];
+var jokeSpot = "";
+var gifBox = [];
 var giphy = [];
-var gifImage="";
-//  function displayContainer (){
-     
-//  } 
+var gifImage = "";
+
+
+
 
 function displayJokes() {
     // displayGif ();
@@ -131,50 +131,61 @@ function displayJokes() {
         url: queryURL,
         method: "GET"
     })
-        .then(function (response) {
-            resultsJoke = response;
-            // cycle through each of the elements of the results array
-            for (i = 0; i < resultsJoke.length; i++) {
-                var jokeDiv = $("<div class='card center'>");
-                jokeDiv.addClass("jokes col l4 m6 s12");
-                // jokeDiv.append("<div class='card-image'>");
-                // jokeDiv.append(gifBox[i]);
-                jokeDiv.append("<div class='card-content'>");
-                jokeQ = resultsJoke[i].setup;
-                var jQ = $("<p>").text(jokeQ);
-                jokeDiv.append(jQ);
-                punchLine = resultsJoke[i].punchline;
-                var pL = $("<p>").text(punchLine);
-                jokeDiv.append(pL);
-                $(".jokesContainer").append(jokeDiv);
-                jokeSpot = jokeDiv;
+    .then(function (response) {
+        resultsJoke = response;
+        // cycle through each of the elements of the results array
+        for (i = 0; i < resultsJoke.length; i++) {
+            var jokeDiv = $("<div class='card'>");
+            jokeDiv.addClass("jokes col m6 s12");
+            jokeQ = resultsJoke[i].setup;
+            var jQ = $("<p class='p1'>").text(jokeQ);
+            jokeDiv.append(jQ);
+            punchLine = resultsJoke[i].punchline;
+            var pL = $("<p class='p2'>").text(punchLine);
+            jokeDiv.append(pL);
+            gifImage = $("<img>");
+            gifImage.attr("src", gifBox[i]);
+            jokeDiv.append(gifImage);
+            $(".jokesContainer").append(jokeDiv);
+            jokeSpot = jokeDiv;
             }
 
         });
 }
 
-// function displayGif (){
-//      var queryURL2 = "https://api.giphy.com/v1/gifs/search?q=laughing&api_key=jGgY1cTVHzVEnPojQe6k9tywEwdrcQoZ&limit=10&rating=pg";
-//     $.ajax({
-//         url: queryURL2,
-//         method: "GET"
-//     })
-//         .then(function (response2) {
-//             giphy = response2.data;
-//             for (var i = 0; i < giphy.length; i++) {
-//                 gifImage = $("<img>");
-//                 gifImage.attr("src", giphy[i].images.fixed_height.url);
-//                 $(".giphySpot").append(gifImage);
-//                 gifBox = gifImage;
-//             }           
-//     });
-// }
+function displayGif() {
+    var queryURL2 = "https://api.giphy.com/v1/gifs/search?q=laughing&api_key=jGgY1cTVHzVEnPojQe6k9tywEwdrcQoZ&limit=10&rating=pg";
+    $.ajax({
+        url: queryURL2,
+        method: "GET"
+    })
+        .then(function (response2) {
+            giphy = response2.data;
+            for (var i = 0; i < giphy.length; i++) {
+                // console.log(giphy[i].url);
+                myGif = (giphy[i].images.fixed_height.url);
+                // console.log(gifBox);
+                gifBox.push(myGif);
+                // console.log(myGif);
+            }
+            displayJokes();
+            // for (j = 0; j < gifBox.length; j++) {
+            //     var gifImage = gifBox[j];
+            // }
+
+
+        });
+}
 
 
 // Call the display joke
-// displayGif ();
-displayJokes();
+displayGif();
 newSearch();
+
+// function displayContainer(gifBox) {
+//     console.log(gifBox);
+// }
+// displayContainer(gifBox);
 
 $("#launch-search").on("click", function (event) {
     event.preventDefault();
